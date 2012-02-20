@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Drag &amp; Drop Prototype</title>
+    <link rel="stylesheet" href="lib/touch/resources/css/sencha-touch.css" type="text/css">
+    <script type="text/javascript" src="lib/touch/sencha-touch.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    
+    <style>
+        body {
+            background-color: #7B7B7B;
+        }
+        
+        #draggable, #invalid {
+            width: 100px;
+            height: 100px;
+            background-color: #00ff00;
+            top: 170px;
+            left: 5px;
+            position: absolute;
+            z-index: 1;
+            -webkit-border-radius: 4px;
+            padding-top: 40px;
+            text-align: center;
+            color: rgba(0,0,0,.5);
+            border-bottom: 1px solid rgba(0,0,0,.3);
+        }
+        
+        #invalid {
+            left: 130px;
+            width: 200px;
+            height: 100px;
+			background-color: #FF3;
+			
+        }
+		#triang {
+			 top: 170px;
+			left: 370px;
+			width:0px; 
+			height:0px; 
+			border-left:50px solid transparent;  /* left arrow slant */
+			border-right:50px solid transparent; /* right arrow slant */
+			border-bottom:50px solid #FF0000; /* bottom, add background color here */
+			font-size:0px;
+            position: absolute;
+            z-index: 1;
+			text-align: center;
+			color: rgba(0,0,0,.5);
+			padding-top: 40px;
+			
+		}
+		
+		#triang.x-dragging {
+			border-bottom:50px solid #2066C2; 
+		}
+        #draggable.x-dragging,
+        #invalid.x-dragging {
+            background-color: #2066C2;
+        }
+        
+        #droppable {
+           
+        }
+        
+        #droppable.x-drop-active {
+           / background-color: #44935E;
+        }
+
+        #droppable.x-drop-hover {
+            background-color: #295A3A;
+        }
+        
+        #droppable.x-drop-invalid {
+            background-color: #932D2E;
+        }
+		
+		
+    </style>
+</head>
+
+<body>
+    <div id="droppable"></div>
+    <div id="draggable">Drag & drop me</div>
+    <div id="invalid">Drag & drop me</div>
+	<div id="triang">Triangle</div>
+	
+</body>
+
+</html>
