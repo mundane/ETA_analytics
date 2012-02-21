@@ -5,27 +5,26 @@
 		<title>
 			Drag &amp; Drop Prototype
 		</title>
-		<link rel="stylesheet" href="lib/touch/resources/css/sencha-touch.css" type="text/css">
+		<link rel="stylesheet" href="lib/touch/resources/css/apple.css" type="text/css">
 		<link rel="stylesheet" href="dragndrop.css" type="text/css">
 		<script type="text/javascript" src="lib/touch/sencha-touch.js"></script>
+		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="index.js"></script>
-
-		<style type="text/css">
-		
-
-
-		</style>
+		<script type="text/javascript">
+		function show_draggables() {
+			$('div').show();
+		}
+ 		</script>
 	</head>
-	<body>
-		<div id="droppable"></div>
-		<div id="draggable">
+	<body  >
+		<div id="square" style="display:none">
 			Drag &amp; drop me
 		</div>
-		<div id="invalid">
+		<div id="circle" style="display:none">
 			Drag &amp; drop me
 		</div>
-		<div id="triang">
-			Triangle
+		<div id="rectangle" style="display:none">
+			Drag &amp; drop me
 		</div>
 	</body>
 </html>

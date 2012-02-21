@@ -2,65 +2,83 @@ body {
 	background-color: #7B7B7B;
 }
 
-#draggable, #invalid {
-	width: 100px;
-	height: 100px;
-	background-color: #00ff00;
-	top: 170px;
-	left: 5px;
+#square, #rectangle {
+	margin: 1em;
+	display:block;
+	padding-top: 40px;
+	text-align: center;
+	color: rgba(0,0,0,.5);
 	position: absolute;
 	z-index: 1;
 	-webkit-border-radius: 4px;
-	padding-top: 40px;
-	text-align: center;
-	color: rgba(0,0,0,.5);
-	border-bottom: 1px solid rgba(0,0,0,.3);
+	height: 100px;	
 }
 
-#invalid {
-	left: 130px;
-	width: 200px;
-	height: 100px;
-	background-color: #FF3;
-			
+#square {
+	width: 100px;
+	background:#f60;
+	border:2px solid #EE2E26;
+	top: 150px;
+	left: 45px;
+	-webkit-box-shadow:
+		3px 3px 6px rgba(0, 0, 0, .2),
+		0px 0px 3px rgba(0, 0, 0, .1),
+		inset 0px 5px 12px #930,
+		inset 0px 15px 2px rgba(240, 150, 69, .5),
+		inset 0px 25px 25px #930;
 }
-#triang {
-	 top: 170px;
-	left: 370px;
-	width:0px; 
-	height:0px; 
-	border-left:50px solid transparent;  /* left arrow slant */
-	border-right:50px solid transparent; /* right arrow slant */
-	border-bottom:50px solid #FF0000; /* bottom, add background color here */
-	font-size:0px;
+
+#square.x-dragging{
+	background:#f82;
+	border:2px solid #EE2E26;
+	color:#fff
+}
+
+#rectangle {
+	top: 330px;
+	left: 5px;
+	width: 200px;
+	background:#f10;
+	border:2px solid #400000 ;
+	-webkit-box-shadow:
+		3px 3px 6px rgba(0, 0, 0, .1),
+		0px 0px 3px rgba(0, 0, 0, .5),
+		inset 0px 5px 12px #A52A2A,
+		inset 0px 15px 2px rgba(220, 130, 61, .5),
+		inset 0px 25px 25px #A52A2A;
+}
+
+#rectangle.x-dragging{
+	background:#f05;
+	border:2px solid #696969;
+	color:#CD5C5C;
+	
+}
+
+#circle {
+	top: 510px;
+	left: 63px;
+	width: 100px; 
+	height: 100px; 
+	background: #CD5C5C;
+	border:2px solid #400000 ;
+	-webkit-border-radius: 50px; 
+	-webkit-box-shadow:
+		3px 3px 6px rgba(0, 0, 0, .3),
+		0px 0px 3px rgba(0, 0, 0, .7),
+		inset 0px 5px 12px #A52A2A,
+		inset 0px 15px 2px rgba(220, 130, 61, .5),
+		inset 0px 25px 25px #A52A2A;
+	border-radius: 50px; 
 	position: absolute;
 	z-index: 1;
 	text-align: center;
 	color: rgba(0,0,0,.5);
 	padding-top: 40px;
-			
 }
 
-#triang.x-dragging {
-	border-bottom:50px solid #2066C2; 
-}
-#draggable.x-dragging,
-#invalid.x-dragging {
-	background-color: #2066C2;
-}
-
-#droppable {
-		   
-}
-
-#droppable.x-drop-active {
-   / background-color: #44935E;
-}
-
-#droppable.x-drop-hover {
-	background-color: #295A3A;
-}
-
-#droppable.x-drop-invalid {
-	background-color: #932D2E;
+#circle.x-dragging {
+	background:#f38;
+	border:2px solid #696769;
+	color:#CD5C5C;
 }
