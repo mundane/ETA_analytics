@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Csv test</title>
+	<script type="text/javascript" src="parsecsv.js"></script>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="json2.js"></script>
+</head>
+<body id="" onload="">
+	<textarea id="csvarea" rows="20" cols="200">Errors, Words, Chars, Time, WPM
+3, 41, 213, 120.959, 20.3374697211452
+13, 41, 213, 223.208, 11.0211103544676
+7, 48, 248, 227.554, 12.6563365179254
+0, 54, 282, 119.358, 27.1452269642588
+11, 54, 282, 136.693, 23.7027499579349
+7, 54, 282, 100.595, 32.208360256474
+17, 58, 332, 164.843, 21.1109965239652
+2, 41, 213, 92.124, 26.7031392471017
+0, 58, 332, 192.395, 18.0877881441825
+5, 42, 238, 57.915, 43.5120435120435
+4, 47, 275, 131.65, 21.4204329661983
+3, 41, 246, 88.791, 27.7055106936514
+5, 13, 61, 37.609, 20.739716557207
+0, 13, 61, 165.488, 4.71333268877502
+1, 13, 61, 229.71, 3.3955857385399
+13, 58, 332, 273.84, 12.7081507449606
+0, 38, 207, 64.53, 35.3324035332404
+0, 39, 212, 135.715, 17.2420145157131</textarea>
+	<button type="button" onclick="alert(JSON.stringify(CSVToArray($('#csvarea').val())));">Click Me!</button>
+</body>
