@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>jStat test page</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/jquery.aristo.css" />
+        <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.8.9.min.js"></script>
+        <script type="text/javascript" src="js/jquery.flot.min.js"></script>
+        <script type="text/javascript" src="js/jstat-0.1.0.min.js"></script>
+        <script type="text/javascript">
+		
+		
+var norm = new NormalDistribution(0,1) // normal distributionvar 
+q = norm.getQuantile(0.95);        // the 0.95 quantile
+var range = jstat.seq(-5,5,100);
+var pbeta = jstat.pbeta(0.5, 2.3, 4.1);
+var dbeta = jstat.dbeta(0.5, 2.3, 4.1);
+var pnorm = jstat.pnorm(0.5, 2.3, 4.1);
+var dnorm = jstat.dnorm(0.5, 2.3, 4.1);
+
+        </script>
+				<button type="button" onclick="alert(q);">Normal distribution</button>
+		<button type="button" onclick="alert(pbeta);">pbeta</button>
+		<button type="button" onclick="alert(dbeta);">dbeta</button>
+		<button type="button" onclick="alert(pnorm);">pnorm</button>
+		<button type="button" onclick="alert(dnorm);">dnorm</button>
+    </head>
+    <body>
+        <div id="plot" style="width:600px; height: 600px;"></div>
+    </body>
+</html>
