@@ -5,6 +5,12 @@
 	<script type="text/javascript" src="parsecsv.js"></script>
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="json2.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		 function replaceText(){
+			var text = JSON.stringify(CSVToArray($('#csvarea').val()));
+			$('#csvarea').val(text);	
+	}
+	</script>
 </head>
 <body id="" onload="">
 	<textarea id="csvarea" rows="20" cols="200">Errors, Words, Chars, Time, WPM
@@ -26,5 +32,7 @@
 13, 58, 332, 273.84, 12.7081507449606
 0, 38, 207, 64.53, 35.3324035332404
 0, 39, 212, 135.715, 17.2420145157131</textarea>
-	<button type="button" onclick="alert(JSON.stringify(CSVToArray($('#csvarea').val())));">Click Me!</button>
+	<button type="button" id="butt" onclick="replaceText();">Click Me!</button>
 </body>
+
+
