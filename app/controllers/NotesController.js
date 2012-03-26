@@ -34,6 +34,11 @@
             { type: 'slide', direction: 'left' }
         );
     },
+	
+	'importnote': function (options) {
+		var currentNote = NotesApp.views.noteEditorView.getRecord();
+		
+	},
 
     'savenote': function (options) {
 

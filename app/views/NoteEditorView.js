@@ -58,7 +58,13 @@
             action: 'savenote'
         });
     },
-
+	importCSVButtonTap : function() {
+        Ext.dispatch({
+            controller: NotesApp.controllers.notesController,
+            action: 'importnote'
+        });
+	},
+	
     trashButtonTap: function () {
         Ext.dispatch({
             controller: NotesApp.controllers.notesController,

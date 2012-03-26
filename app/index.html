@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Project Flow</title>
-         <script src="lib/touch/sencha-touch.js" type="text/javascript"></script>
-         <script src="lib/charts/touch-charts.js" type="text/javascript"></script>
-         <script src="app.js" type="text/javascript"></script>
-         <script src="data.js" type="text/javascript"></script>
-		 <script src="graph.js" type="text/javascript"></script>
-         <link href="theming/mondrian.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body></body>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>My Notes</title>
+    <script src="lib/touch/sencha-touch.js" type="text/javascript"></script>
+    <link href="lib/touch/sencha-touch.css" rel="stylesheet" type="text/css" />
+    <link href="app.css" rel="stylesheet" type="text/css" />    
+    <script src="app.js" type="text/javascript"></script> 
+    <script src="models/NoteModel.js" type="text/javascript"></script>
+    <script src="stores/NotesStore.js" type="text/javascript"></script>
+    <script src="views/MainView.js" type="text/javascript"></script>
+    <script src="views/NotesListView.js" type="text/javascript"></script>
+    <script src="views/NoteEditorView.js" type="text/javascript"></script>
+    <script src="controllers/NotesController.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="loading-mask" style="margin:auto;width:200px;padding-top:50px">Loading My Notes...</div>
+</body>
 </html>
