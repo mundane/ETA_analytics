@@ -26,6 +26,20 @@
         );
     },
 
+    'import': function (options) {
+        var now = new Date();
+        var noteId = now.getTime();
+        var note = Ext.ModelMgr.create({ id: noteId, date: now, title: '', narrative: '' },
+            'AnalyticsModel'
+        );
+
+        AnalyticsApp.views.analyticsImportView.load(note);
+        AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.analyticsImportView,
+            { type: 'slide', direction: 'left' }
+        );
+	},
+
     'editnote': function (options) {
 
         AnalyticsApp.views.noteEditorView.load(options.note);
@@ -38,10 +52,6 @@
 	'importnote': function (options) {
 		var currentNote = AnalyticsApp.views.noteEditorView.getRecord();
 
-	},
-
-	'import': function (options) {
-		var now = new Date();
 	},
 
     'savenote': function (options) {
