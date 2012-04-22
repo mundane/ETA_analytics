@@ -1,4 +1,4 @@
-AnalyticsApp.views.AnalyticsImportView = Ext.extend(Ext.form.FormPanel, {
+AnalyticsApp.views.DefaultView1 = Ext.extend(Ext.form.FormPanel, {
 
     initComponent: function () {
 

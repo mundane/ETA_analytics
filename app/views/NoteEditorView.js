@@ -64,15 +64,14 @@
             action: 'importnote'
         });
 	},
-	
+
     trashButtonTap: function () {
         Ext.dispatch({
             controller: AnalyticsApp.controllers.notesController,
             action: 'deletenote'
         });
     },
-
-    items: [{
+	/*{
         xtype: 'textfield',
         name: 'title',
         label: 'Title',
@@ -81,7 +80,28 @@
         xtype: 'textareafield',
         name: 'narrative',
         label: 'Narrative'
-    }]
+    }, */
+    items: [{
+		xtype:'panel',
+		fullscreen: true,
+		items: [{
+			xtype: 'panel',
+			docked: 'left',
+			id: 'sidebar',
+			width: '70',
+			layout: 'fit',
+			items:[{
+				xtype: 'list',
+				id: 'sidebarMenu',
+				itemTpl: '<div> List item {title}</div>',
+				store: AnalyticsApp.stores.graphStore
+
+			}]
+		}],
+		html: 'Testing'
+
+    }
+	]
 });
 
 

@@ -54,6 +54,37 @@
 
 	},
 
+	'savedata': function (optiona) {
+		var currentNote = AnalyticsApp.views.analyticsImportView.getRecord();
+		AnalyticsApp.views.analyticsImportView.updateRecord(currentNote);
+		var jsonData = JSON.stringify(CSVToArray(currentNote.get('narrative')));
+		currentNote.set('narrative', jsonData);
+
+        var errors = currentNote.validate();
+        if (!errors.isValid()) {
+			currentNote.reject();
+            Ext.Msg.alert('Wait!', errors.getByField('title')[0].message, Ext.emptyFn);
+            return;
+        }
+        if (null == AnalyticsApp.stores.analyticsStore.findRecord('id', currentNote.data.id)) {
+            AnalyticsApp.stores.analyticsStore.add(currentNote);
+        } else {
+             currentNote.setDirty();
+        }
+
+        AnalyticsApp.stores.analyticsStore.sync();
+
+        AnalyticsApp.stores.analyticsStore.sort([{ property: 'date', direction: 'DESC'}]);
+
+        AnalyticsApp.views.notesListView.refreshList();
+
+        AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.notesListView,
+            { type: 'slide', direction: 'right' }
+        );
+
+	},
+
     'savenote': function (options) {
 
         var currentNote = AnalyticsApp.views.noteEditorView.getRecord();
