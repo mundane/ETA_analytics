@@ -1,12 +1,12 @@
-﻿Ext.regStore('NotesStore', {
-    model: 'NoteModel',
+﻿Ext.regStore('AnalyticsStore', {
+    model: 'AnalyticsModel',
     sorters: [{
         property: 'date',
         direction: 'DESC'
     }],
     proxy: {
         type: 'localstorage',
-        id: 'notes-app-store'
+        id: 'analytics-app-store'
     },
     getGroupString: function (record) {
         if (record && record.data.date) {
@@ -17,4 +17,4 @@
     }
 });
 
-NotesApp.stores.notesStore = Ext.StoreMgr.get('NotesStore');
+AnalyticsApp.stores.analyticsStore = Ext.StoreMgr.get('AnalyticsStore');
