@@ -1,4 +1,4 @@
-﻿Ext.regModel('NoteModel', {
+﻿Ext.regModel('AnalyticsModel', {
     idProperty: 'id',
     fields: [
         { name: 'id', type: 'int' },

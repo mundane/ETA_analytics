@@ -1,4 +1,4 @@
-﻿NotesApp.views.NoteEditorView = Ext.extend(Ext.form.FormPanel, {
+﻿AnalyticsApp.views.NoteEditorView = Ext.extend(Ext.form.FormPanel, {
 
     initComponent: function () {
 
@@ -42,32 +42,32 @@
 
         this.dockedItems = [this.topToolbar, this.bottomToolbar];
 
-        NotesApp.views.NoteEditorView.superclass.initComponent.call(this);
+        AnalyticsApp.views.NoteEditorView.superclass.initComponent.call(this);
     },
 
     backButtonTap: function () {
         Ext.dispatch({
-            controller: NotesApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.notesController,
             action: 'canceledit'
         });
     },
 
     saveButtonTap: function () {
         Ext.dispatch({
-            controller: NotesApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.notesController,
             action: 'savenote'
         });
     },
 	importCSVButtonTap : function() {
         Ext.dispatch({
-            controller: NotesApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.notesController,
             action: 'importnote'
         });
 	},
 	
     trashButtonTap: function () {
         Ext.dispatch({
-            controller: NotesApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.notesController,
             action: 'deletenote'
         });
     },

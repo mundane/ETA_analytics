@@ -2,12 +2,12 @@
 
     'index': function (options) {
 
-        if (!NotesApp.views.mainView) {
-            NotesApp.views.mainView = new NotesApp.views.MainView();
+        if (!AnalyticsApp.views.mainView) {
+            AnalyticsApp.views.mainView = new AnalyticsApp.views.MainView();
         }
 
-        NotesApp.views.mainView.setActiveItem(
-            NotesApp.views.notesListView
+        AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.notesListView
         );
     },
 
@@ -16,35 +16,39 @@
         var now = new Date();
         var noteId = now.getTime();
         var note = Ext.ModelMgr.create({ id: noteId, date: now, title: '', narrative: '' },
-            'NoteModel'
+            'AnalyticsModel'
         );
 
-        NotesApp.views.noteEditorView.load(note);
-        NotesApp.views.mainView.setActiveItem(
-            NotesApp.views.noteEditorView,
+        AnalyticsApp.views.noteEditorView.load(note);
+        AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.noteEditorView,
             { type: 'slide', direction: 'left' }
         );
     },
 
     'editnote': function (options) {
 
-        NotesApp.views.noteEditorView.load(options.note);
-        NotesApp.views.mainView.setActiveItem(
-            NotesApp.views.noteEditorView,
+        AnalyticsApp.views.noteEditorView.load(options.note);
+        AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.noteEditorView,
             { type: 'slide', direction: 'left' }
         );
     },
-	
+
 	'importnote': function (options) {
-		var currentNote = NotesApp.views.noteEditorView.getRecord();
-		
+		var currentNote = AnalyticsApp.views.noteEditorView.getRecord();
+
+	},
+
+	'import': function (options) {
+		var now = new Date();
 	},
 
     'savenote': function (options) {
 
-        var currentNote = NotesApp.views.noteEditorView.getRecord();
+        var currentNote = AnalyticsApp.views.noteEditorView.getRecord();
 
-        NotesApp.views.noteEditorView.updateRecord(currentNote);
+        AnalyticsApp.views.noteEditorView.updateRecord(currentNote);
 
         var errors = currentNote.validate();
         if (!errors.isValid()) {
@@ -53,48 +57,48 @@
             return;
         }
 
-        if (null == NotesApp.stores.notesStore.findRecord('id', currentNote.data.id)) {
-            NotesApp.stores.notesStore.add(currentNote);
+        if (null == AnalyticsApp.stores.analyticsStore.findRecord('id', currentNote.data.id)) {
+            AnalyticsApp.stores.analyticsStore.add(currentNote);
         } else {
              currentNote.setDirty();
         }
 
-        NotesApp.stores.notesStore.sync();
+        AnalyticsApp.stores.analyticsStore.sync();
 
-        NotesApp.stores.notesStore.sort([{ property: 'date', direction: 'DESC'}]);
+        AnalyticsApp.stores.analyticsStore.sort([{ property: 'date', direction: 'DESC'}]);
 
-        NotesApp.views.notesListView.refreshList();
+        AnalyticsApp.views.notesListView.refreshList();
 
-        NotesApp.views.mainView.setActiveItem(
-            NotesApp.views.notesListView,
+        AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.notesListView,
             { type: 'slide', direction: 'right' }
         );
     },
 
     'deletenote': function (options) {
 
-        var currentNote = NotesApp.views.noteEditorView.getRecord();
+        var currentNote = AnalyticsApp.views.noteEditorView.getRecord();
 
-        if (NotesApp.stores.notesStore.findRecord('id', currentNote.data.id)) {
-            NotesApp.stores.notesStore.remove(currentNote);
+        if (AnalyticsApp.stores.analyticsStore.findRecord('id', currentNote.data.id)) {
+            AnalyticsApp.stores.analyticsStore.remove(currentNote);
         }
 
-        NotesApp.stores.notesStore.sync();
-        NotesApp.views.notesListView.refreshList();
+        AnalyticsApp.stores.analyticsStore.sync();
+        AnalyticsApp.views.notesListView.refreshList();
 
-        NotesApp.views.mainView.setActiveItem(
-            NotesApp.views.notesListView,
+        AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.notesListView,
             { type: 'slide', direction: 'right' }
         );
     },
 
     'canceledit': function (options) {
 
-        NotesApp.views.mainView.setActiveItem(
-            NotesApp.views.notesListView,
+        AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.notesListView,
             { type: 'slide', direction: 'right' }
         );
     }
 });
 
-NotesApp.controllers.notesController = Ext.ControllerManager.get('NotesController');
+AnalyticsApp.controllers.notesController = Ext.ControllerManager.get('NotesController');

@@ -1,10 +1,10 @@
 ﻿var App = new Ext.Application({
-    name: 'NotesApp',
+    name: 'AnalyticsApp',
     useLoadMask: true,
 
     launch: function () {
         Ext.dispatch({
-            controller: NotesApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.notesController,
             action: 'index'
         });
     }

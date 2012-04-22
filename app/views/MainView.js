@@ -1,23 +1,23 @@
-﻿NotesApp.views.MainView = Ext.extend(Ext.Panel, {
+﻿AnalyticsApp.views.MainView = Ext.extend(Ext.Panel, {
     fullscreen: true,
     layout: 'card',
     cardSwitchAnimation: 'slide',
     initComponent: function () {
 
-        Ext.apply(NotesApp.views, {
-            notesListView: new NotesApp.views.NotesListView({ notesStore: NotesApp.stores.notesStore }),
-            noteEditorView: new NotesApp.views.NoteEditorView()
+        Ext.apply(AnalyticsApp.views, {
+            notesListView: new AnalyticsApp.views.NotesListView({ analyticsStore: AnalyticsApp.stores.analyticsStore }),
+            noteEditorView: new AnalyticsApp.views.NoteEditorView()
         });
 
         this.items = [
-            NotesApp.views.notesListView,
-            NotesApp.views.noteEditorView
-        ]
+            AnalyticsApp.views.notesListView,
+            AnalyticsApp.views.noteEditorView
+        ];
 
-        NotesApp.views.MainView.superclass.initComponent.call(this);
+        AnalyticsApp.views.MainView.superclass.initComponent.call(this);
 
         this.on('render', function () {
-            NotesApp.stores.notesStore.load();
+            AnalyticsApp.stores.analyticsStore.load();
         });
     }
 });

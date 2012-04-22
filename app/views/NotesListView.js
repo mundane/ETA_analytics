@@ -1,6 +1,6 @@
-﻿NotesApp.views.NotesListView = Ext.extend(Ext.Panel, {
+﻿AnalyticsApp.views.NotesListView = Ext.extend(Ext.Panel, {
 
-    notesStore: Ext.emptyFn,
+    analyticsStore: Ext.emptyFn,
     notesList: Ext.emptyFn,
 
     layout: 'fit',
@@ -14,18 +14,26 @@
             scope: this
         });
 
+        this.importButton = new Ext.Button({
+            text: 'Import',
+            ui: 'action',
+            handler: this.onImport,
+            scope: this
+        });
+		
         this.topToolbar = new Ext.Toolbar({
-            title: 'My Notes',
+            title: 'My Analytics',
             items: [
                 { xtype: 'spacer' },
-                this.newButton
+                this.newButton,
+				this.importButton
             ]
         });
 
         this.dockedItems = [this.topToolbar];
 
         this.notesList = new Ext.List({
-            store: this.notesStore,
+            store: this.analyticsStore,
             grouped: true,
             emptyText: '<div style="margin:5px;">No notes cached.</div>',
             onItemDisclosure: true,
@@ -36,23 +44,31 @@
 
         this.notesList.on('disclose', function (record, index, evt) {
             this.onEditNote(record, index);
-        }, this),
+        }, this);
 
         this.items = [this.notesList];
 
-        NotesApp.views.NotesListView.superclass.initComponent.call(this);
+        AnalyticsApp.views.NotesListView.superclass.initComponent.call(this);
     },
 
     onNewNote: function () {
         Ext.dispatch({
-            controller: NotesApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.notesController,
             action: 'newnote'
         });
     },
 
+    onImport: function () {
+        Ext.dispatch({
+            controller: AnalyticsApp.controllers.notesController,
+            action: 'import'
+        });
+    },
+
+
     onEditNote: function (record, index) {
         Ext.dispatch({
-            controller: NotesApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.notesController,
             action: 'editnote',
             note: record
         });
