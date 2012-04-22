@@ -1,0 +1,24 @@
+{
+    "id": "ExtBox1-ext-gen2192",
+    "type": "application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "stores": null,
+        "views": [
+            "Mainview"
+        ],
+        "name": "ProjectFlow",
+        "controllers": [
+            "MyController"
+        ]
+    },
+    "customConfigs": [],
+    "designerId": "application",
+    "$viewOrder": 0,
+    "iconCls": "icon-application",
+    "expanded": true
+}
