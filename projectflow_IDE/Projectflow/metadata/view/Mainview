@@ -1,0 +1,130 @@
+{
+    "id": "ExtBox1-ext-gen2533",
+    "type": "panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|initialView": true,
+        "width": null,
+        "layout": "card",
+        "designer|userClassName": "Mainview"
+    },
+    "customConfigs": [],
+    "designerId": "5928cb80-f4ae-41a3-ac3e-ce919cb68339",
+    "$viewOrder": 0,
+    "expanded": true,
+    "cn": [
+        {
+            "id": "ExtBox1-ext-gen2705",
+            "type": "toolbar",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "docked": "top",
+                "id": "Toolbar",
+                "designer|userClassName": "MyToolbar"
+            },
+            "customConfigs": [],
+            "expanded": true,
+            "cn": [
+                {
+                    "id": "ExtBox1-ext-gen2890",
+                    "type": "button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "docked": "right",
+                        "id": "Info",
+                        "itemId": "mybutton",
+                        "iconCls": "info",
+                        "iconMask": true,
+                        "text": null,
+                        "designer|userClassName": "MyButton"
+                    },
+                    "customConfigs": [],
+                    "expanded": true,
+                    "cn": [
+                        {
+                            "id": "ExtBox1-ext-gen18244",
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onInfoTap",
+                                "implHandler": "  \nconsole.log('info clicked');\n    generateData = function(n, floor) {\n            var data = [],\n                p = (Math.random() * 11) + 1,\n                i;\n\n            floor = (!floor && floor !== 0) ? 20 : floor;\n\n            for (i = 0; i < (n || 12); i++) {\n                data.push({\n                    name: Date.monthNames[i % 12],\n                    2008: Math.floor(Math.max((Math.random() * 100), floor)),\n                    2009: Math.floor(Math.max((Math.random() * 100), floor)),\n                    2010: Math.floor(Math.max((Math.random() * 100), floor)),\n                    data4: Math.floor(Math.max((Math.random() * 100), floor)),\n                    data5: Math.floor(Math.max((Math.random() * 100), floor)),\n                    data6: Math.floor(Math.max((Math.random() * 100), floor)),\n                    data7: Math.floor(Math.max((Math.random() * 100), floor)),\n                    data8: Math.floor(Math.max((Math.random() * 100), floor)),\n                    data9: Math.floor(Math.max((Math.random() * 100), floor))\n                });\n            }\n            return data;\n        };\n      Ext.store1 = new Ext.data.JsonStore({\n            data: generateData(5, 20)\n        });\n ",
+                                "name": "tap",
+                                "designer|userClassName": "onInfoTap"
+                            },
+                            "customConfigs": [],
+                            "expanded": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ExtBox1-ext-gen9158",
+            "type": "panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "docked": "left",
+                "id": "Sidebar",
+                "width": 70,
+                "layout": "fit",
+                "designer|userClassName": "MyPanel1"
+            },
+            "customConfigs": [],
+            "expanded": true,
+            "cn": [
+                {
+                    "id": "ExtBox1-ext-gen20476",
+                    "type": "list",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "Sidebarmenu",
+                        "itemTpl": "<div>List Item {string}</div>",
+                        "designer|userClassName": "MyList"
+                    },
+                    "customConfigs": [],
+                    "expanded": true
+                }
+            ]
+        },
+        {
+            "id": "ExtBox1-ext-gen7012",
+            "type": "container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "html": "<h1>Bottom Tabs</h1><p>Docking tabs to the bottom will automatically change their style. The tabs below are type=\"light\", though the standard type is dark. Badges (like the 4 &amp; Long title below) can be added by setting <code>badgeText</code> when creating a tab/card or by using <code>setBadge()</code> on the tab later.</p>",
+                "id": "Canvas",
+                "designer|userClassName": "MyContainer"
+            },
+            "customConfigs": [],
+            "expanded": true
+        }
+    ]
+}

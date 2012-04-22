@@ -1,0 +1,16 @@
+{
+    "id": "ExtBox1-ext-gen33139",
+    "type": "jsresource",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "url": "lib/charts/touch-charts.js"
+    },
+    "customConfigs": [],
+    "designerId": "90438f46-44ce-4178-9e2b-e0fd4b43e2c2",
+    "$viewOrder": 0,
+    "expanded": true
+}
