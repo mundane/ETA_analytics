@@ -42,9 +42,17 @@
 
     'editnote': function (options) {
 
-        AnalyticsApp.views.noteEditorView.load(options.note);
+        /* AnalyticsApp.views.noteEditorView.load(options.note); */
         AnalyticsApp.views.mainView.setActiveItem(
-            AnalyticsApp.views.noteEditorView,
+            AnalyticsApp.views.analyticsGridView,
+            { type: 'slide', direction: 'left' }
+        );
+    },    
+
+	'defaultview': function (options) {
+
+      AnalyticsApp.views.mainView.setActiveItem(
+      AnalyticsApp.views.defaultView,
             { type: 'slide', direction: 'left' }
         );
     },

@@ -66,11 +66,11 @@
     },
 
 
-    onEditNote: function (record, index) {
+    onEditNote: function () {
         Ext.dispatch({
             controller: AnalyticsApp.controllers.analyticsController,
             action: 'editnote',
-            note: record
+       
         });
     },
 
