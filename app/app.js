@@ -4,7 +4,7 @@
 
     launch: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.analyticsController,
             action: 'index'
         });
     }

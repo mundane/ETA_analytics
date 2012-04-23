@@ -53,14 +53,14 @@
 
     onNewNote: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.analyticsController,
             action: 'newnote'
         });
     },
 
     onImport: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.analyticsController,
             action: 'import'
         });
     },
@@ -68,7 +68,7 @@
 
     onEditNote: function (record, index) {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.analyticsController,
             action: 'editnote',
             note: record
         });

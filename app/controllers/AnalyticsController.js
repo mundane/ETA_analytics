@@ -1,4 +1,4 @@
-﻿Ext.regController('NotesController', {
+﻿Ext.regController('AnalyticsController', {
 
     'index': function (options) {
 
@@ -142,4 +142,4 @@
     }
 });
 
-AnalyticsApp.controllers.notesController = Ext.ControllerManager.get('NotesController');
+AnalyticsApp.controllers.analyticsController = Ext.ControllerManager.get('AnalyticsController');

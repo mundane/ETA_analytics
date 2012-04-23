@@ -55,27 +55,27 @@ AnalyticsApp.views.AnalyticsImportView = Ext.extend(Ext.form.FormPanel, {
 
     backButtonTap: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.analyticsController,
             action: 'canceledit'
         });
     },
 
     saveButtonTap: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.analyticsController,
             action: 'savedata'
         });
     },
 	importCSVButtonTap : function() {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.analyticsController,
             action: 'importnote'
         });
 	},
 
     trashButtonTap: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.notesController,
+            controller: AnalyticsApp.controllers.analyticsController,
             action: 'deletenote'
         });
     },
