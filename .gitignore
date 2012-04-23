@@ -1,1 +1,8 @@
 .DS_Store
+*.aux
+*.log
+*.maf
+*.mtc
+*.mtc0
+*.syntex.gz
+*.toc
