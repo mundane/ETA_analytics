@@ -4,5 +4,6 @@
 *.maf
 *.mtc
 *.mtc0
-*.syntex.gz
+*.synctex.gz
 *.toc
+report3.pdf
