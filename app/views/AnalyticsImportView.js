@@ -61,6 +61,7 @@ AnalyticsApp.views.AnalyticsImportView = Ext.extend(Ext.form.FormPanel, {
     },
 
     saveButtonTap: function () {
+		console.log('savedata');
         Ext.dispatch({
             controller: AnalyticsApp.controllers.analyticsController,
             action: 'savedata'
@@ -79,8 +80,7 @@ AnalyticsApp.views.AnalyticsImportView = Ext.extend(Ext.form.FormPanel, {
             action: 'deletenote'
         });
     },
-
-    items: [{
+	items: [{
         xtype: 'textfield',
         name: 'title',
         label: 'Title',
@@ -90,6 +90,7 @@ AnalyticsApp.views.AnalyticsImportView = Ext.extend(Ext.form.FormPanel, {
         name: 'narrative',
         label: 'Narrative'
     }]
+
 });
 
 

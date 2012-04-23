@@ -1,4 +1,4 @@
-Ext.regStore('GraphStore', {
+/*Ext.regStore('GraphStore', {
     model: 'GraphModel',
 	data: [
 		{id: 1, title: 'Flowchart', desc: 'Flowcharting gone wild'},
@@ -10,3 +10,4 @@ Ext.regStore('GraphStore', {
 });
 
 AnalyticsApp.stores.graphStore = Ext.StoreMgr.get('GraphStore');
+*/

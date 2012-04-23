@@ -55,6 +55,7 @@
 	},
 
 	'savedata': function (optiona) {
+		console.log('hej hej hej');
 		var currentNote = AnalyticsApp.views.analyticsImportView.getRecord();
 		AnalyticsApp.views.analyticsImportView.updateRecord(currentNote);
 		var jsonData = JSON.stringify(CSVToArray(currentNote.get('narrative')));

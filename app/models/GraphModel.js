@@ -1,4 +1,4 @@
-Ext.regModel('AnalyticsModel', {
+Ext.regModel('GraphModel', {
     idProperty: 'id',
     fields: [
         { name: 'id', type: 'int' },

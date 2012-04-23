@@ -20,7 +20,7 @@
             handler: this.onImport,
             scope: this
         });
-		
+
         this.topToolbar = new Ext.Toolbar({
             title: 'My Analytics',
             items: [
