@@ -35,11 +35,10 @@
         this.notesList = new Ext.List({
             store: this.analyticsStore,
             grouped: true,
-            emptyText: '<div style="margin:5px;">No notes cached.</div>',
+			indexBar: true,
+			emptyText: '<div style="margin:5px;">No notes cached.</div>',
             onItemDisclosure: true,
-            itemTpl: '<div class="list-item-title">{title}</div>' +
-                            '<div class="list-item-narrative">{narrative}</div>'
-
+            itemTpl: '<div class="list-item-title">{title}</div>'
         });
 
         this.notesList.on('disclose', function (record, index, evt) {
@@ -71,7 +70,6 @@
             controller: AnalyticsApp.controllers.analyticsController,
             action: 'editnote',
 			note: record
-       
         });
     },
 
