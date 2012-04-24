@@ -66,19 +66,11 @@
     },
 
 
-<<<<<<< HEAD
-    onEditNote: function (record,index) {
-        Ext.dispatch({
-            controller: AnalyticsApp.controllers.analyticsController,
-            action: 'editnote',
-            note:record
-=======
     onEditNote: function (record, index) {
         Ext.dispatch({
             controller: AnalyticsApp.controllers.analyticsController,
             action: 'editnote',
 			note: record
->>>>>>> 0055fa9c3246a810dee8bd8f78b17b7907f7bef5
        
         });
     },

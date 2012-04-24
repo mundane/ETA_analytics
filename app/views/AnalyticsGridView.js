@@ -62,6 +62,13 @@
             action: 'index'
         });
     },
+     
+   saveButtonTap: function () {
+        Ext.dispatch({
+            controller: AnalyticsApp.controllers.analyticsController,
+            action: 'creategraph'
+        });
+    },
 
     trashButtonTap: function () {
         Ext.dispatch({
