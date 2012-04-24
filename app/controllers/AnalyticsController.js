@@ -42,7 +42,7 @@
 
     'editnote': function (options) {
 
-        /* AnalyticsApp.views.noteEditorView.load(options.note); */
+		AnalyticsApp.views.analyticsGridView.Canvas.update(options.note.data);
         AnalyticsApp.views.mainView.setActiveItem(
             AnalyticsApp.views.analyticsGridView,
             { type: 'slide', direction: 'left' }
