@@ -36,6 +36,7 @@
         });
 
 		this.Canvas = new Ext.Component ({
+			id:'canvas',
 			tpl: '<div id="record-{id}">{narrative}</div>'
 		});
 

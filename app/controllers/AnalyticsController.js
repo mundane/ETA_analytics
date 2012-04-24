@@ -142,7 +142,7 @@
         );
     },
     
-            'creategraph': function (options) {
+'creategraph': function (options) {
  var store1 = new Ext.data.JsonStore({
     fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
     data: [
@@ -163,7 +163,6 @@ console.log("1");
     id:'mychart',
     animate: true,
     store: store1,
-    theme: 'Base:gradients',
     series: [{
         type: 'pie',
         angleField: 'data1',
@@ -201,6 +200,8 @@ console.log("1");
  console.log("2");
 
     },
+    
+    
     
 
     'canceledit': function (options) {
