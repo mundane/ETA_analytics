@@ -142,57 +142,130 @@
         );
     },
 
-	'creategraph': function (options) {
+	'Pie': function (options) {
 		AnalyticsApp.views.analyticsGridView.Canvas.update("");
-		var store1 = new Ext.data.JsonStore({
-			fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
-			data: [
-			{'name':'metric one', 'data1':10, 'data2':12, 'data3':14, 'data4':8, 'data5':13},
-			{'name':'metric two', 'data1':7, 'data2':8, 'data3':16, 'data4':10, 'data5':3},
-			{'name':'metric three', 'data1':5, 'data2':2, 'data3':14, 'data4':12, 'data5':7},
-			{'name':'metric four', 'data1':24, 'data2':14, 'data3':6, 'data4':1, 'data5':23},
-			{'name':'metric five', 'data1':27, 'data2':38, 'data3':36, 'data4':13, 'data5':33}
-			]
-		});
+		generateData = function(n, floor) {
+            var data = [],
+                p = (Math.random() * 11) + 1,
+                i;
 
-		console.log("1");
+            floor = (!floor && floor !== 0) ? 20 : floor;
 
-		var chartpanel = new Ext.chart.Chart({
+            for (i = 0; i < (n || 12); i++) {
+                data.push({
+                    name: Date.monthNames[i % 12],
+                    2007: Math.floor(Math.max((Math.random() * 100), floor))
+                });
+            }
+            return data;
+        };
+        var store1 = new Ext.data.JsonStore({
+            fields: ['name', '2007'],
+            data: generateData(6, 2)
+        });
+        		
+		var chartPanel = new Ext.chart.Panel({
 			renderTo:'canvas',
-			width: 500,
-			height: 300,
+			title: 'Pie Chart',
+			width: 1200,
+			height: 600,
 			id:'mychart',
 			animate: true,
 			store: store1,
-			series: [{
-				type: 'pie',
-				angleField: 'data1',
-				showInLegend: true,
-				tips: {
-					trackMouse: true,
-					width: 140,
-					height: 28,
-					renderer: function(storeItem, item) {
-						//calculate and display percentage on hover
-						var total = 0;
-						store.each(function(rec) {
-							total += rec.get('data1');
-						});
-						this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('data1') / total * 100) + '%');
-					}
-				},
-				highlight: {
-					segment: {
-						margin: 20
-					}
-				},
-				label: {
-					field: 'name',
-					display: 'rotate',
-					contrast: true,
-					font: '18px Arial'
-				}
-			}]
+			items: {
+                cls: 'pie1',
+                store: store1,
+                theme: 'Demo',
+                shadow: false,
+                animate: true,
+                insetPadding: 20,
+                legend: {
+                    position: {
+                        portrait: 'bottom',
+                        landscape: 'right'
+                    }
+                },
+                interactions: [{
+                    type: 'reset',
+                    confirm: true
+                },
+                {
+                    type: 'rotate'
+                },
+                {
+                    type: 'iteminfo',
+                    gesture: 'taphold',
+                    listeners: {
+                        show: function(interaction, item, panel) {
+                            var storeItem = item.storeItem;
+                            panel.update(['<ul><li><b>Month: </b>' + storeItem.get('name') + '</li>', '<li><b>Value: </b> ' + storeItem.get('2007') + '</li></ul>'].join(''));
+                        }
+                    }
+                },
+                {
+                    type: 'piegrouping',
+                    //snapWhileDragging: true,
+                    onSelectionChange: function(me, items) {
+                        if (items.length) {
+                            var sum = 0,
+                                i = items.length;
+                            while(i--) {
+                                sum += items[i].storeItem.get('2007');
+                            }
+                            chartPanel.descriptionPanel.setTitle('Total: ' + sum);
+                            chartPanel.headerPanel.setActiveItem(1, {
+                                type: 'slide',
+                                direction: 'left'
+                            });
+                        }
+                        else {
+                            chartPanel.headerPanel.setActiveItem(0, {
+                                type: 'slide',
+                                direction: 'right'
+                            });
+                        }
+                    }
+                }],
+                series: [{
+                    type: 'pie',
+                    field: '2007',
+                    showInLegend: true,
+                    highlight: false,
+                    listeners: {
+                        'labelOverflow': function(label, item) {
+                            item.useCallout = true;
+                        }
+                    },
+                    // Example to return as soon as styling arrives for callouts
+                    callouts: {
+                        renderer: function(callout, storeItem) {
+                            callout.label.setAttributes({
+                                text: storeItem.get('name')
+                            }, true);
+                        },
+                        filter: function() {
+                            return false;
+                        },
+                        box: {
+                          //no config here.
+                        },
+                        lines: {
+                            'stroke-width': 2,
+                            offsetFromViz: 20
+                        },
+                        label: {
+                           font: 'italic 14px Arial'
+                        },
+                        styles: {
+                            font: '14px Arial'
+                        }
+                    },
+                    label: {
+                        field: 'name'
+                    }
+                }]
+            }
+		 
 		});
 
     },

@@ -48,7 +48,10 @@
 				xtype: 'list',
 				id:'Sidebarmenu',
 				store: AnalyticsApp.stores.graphStore,
-				itemTpl: '<div>{title}</div>'
+				listeners:{
+				       selectionchange: this.menuButtonTap
+					},
+				itemTpl: '<img src="{icon}" width="48" height="48"/>'
 			}],
 			scope: this
         });
@@ -66,16 +69,26 @@
      
    saveButtonTap: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.analyticsController,
-            action: 'creategraph'
+            controller: AnalyticsApp.controllers.analyticsGraphController,
+            action: 'Pie'
         });
+    },
+    
+    menuButtonTap: function (model, records) {
+		if (records[0]) {
+         Ext.dispatch({
+            controller: AnalyticsApp.controllers.analyticsGraphController,
+            action: records[0].data.title
+        });
+		}
     },
 
     trashButtonTap: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.analyticsController,
-            action: 'deletenote'
+            controller: AnalyticsApp.controllers.analyticsGraphController,
+            action: 'Pie'
         });
+        
     }
 
 });
