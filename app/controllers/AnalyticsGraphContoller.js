@@ -25,7 +25,8 @@ Ext.regController('AnalyticsGraphController', {
 		var chartPanel = new Ext.chart.Panel({
 			renderTo:'canvas',
 			title: 'Pie Chart',
-		    autoSize:true,
+		    width: 1200,
+			height: 600,
 			id:'mychart',
 			animate: true,
 			store: store1,
