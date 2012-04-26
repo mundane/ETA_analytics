@@ -1,36 +1,37 @@
 Ext.regController('AnalyticsGraphController', {
-	
-	   'Pie': function (options) {
-		    AnalyticsApp.views.analyticsGridView.Canvas.update("");
-		generateData1 = function(n, floor) {
-            var data = [],
-                p = (Math.random() * 11) + 1,
-                i;
 
-            floor = (!floor && floor !== 0) ? 20 : floor;
+    'pie': function (options) {
+        "use strict";
+        AnalyticsApp.views.analyticsGridView.Canvas.update("");
+        var generateData1 = function (n, floor) {
+                var data = [],
+                    p = (Math.random() * 11) + 1,
+                    i;
 
-            for (i = 0; i < (n || 12); i++) {
-                data.push({
-                    name: Date.monthNames[i % 12],
-                    2007: Math.floor(Math.max((Math.random() * 100), floor))
-                });
-            }
-            return data;
-        };
+                floor = (!floor && floor !== 0) ? 20 : floor;
+
+                for (i = 0; i < (n || 12); i++) {
+                    data.push({
+                        name: Date.monthNames[i % 12],
+                        2007: Math.floor(Math.max((Math.random() * 100), floor))
+                    });
+                }
+                return data;
+            };
         var store1 = new Ext.data.JsonStore({
             fields: ['name', '2007'],
             data: generateData1(6, 2)
         });
-        		
-		var chartPanel = new Ext.chart.Panel({
-			renderTo:'canvas',
-			title: 'Pie Chart',
-		    width: 1200,
-			height: 600,
-			id:'mychart',
-			animate: true,
-			store: store1,
-			items: {
+
+        var chartPanel = new Ext.chart.Panel({
+            renderTo: 'canvas',
+            title: 'Pie Chart',
+            width: 1200,
+            height: 600,
+            id: 'mychart',
+            animate: true,
+            store: store1,
+            items: {
                 cls: 'pie1',
                 store: store1,
                 theme: 'Demo',
@@ -46,28 +47,25 @@ Ext.regController('AnalyticsGraphController', {
                 interactions: [{
                     type: 'reset',
                     confirm: true
-                },
-                {
+                }, {
                     type: 'rotate'
-                },
-                {
+                }, {
                     type: 'iteminfo',
                     gesture: 'taphold',
                     listeners: {
-                        show: function(interaction, item, panel) {
+                        show: function (interaction, item, panel) {
                             var storeItem = item.storeItem;
                             panel.update(['<ul><li><b>Month: </b>' + storeItem.get('name') + '</li>', '<li><b>Value: </b> ' + storeItem.get('2007') + '</li></ul>'].join(''));
                         }
                     }
-                },
-                {
+                }, {
                     type: 'piegrouping',
                     //snapWhileDragging: true,
-                    onSelectionChange: function(me, items) {
+                    onSelectionChange: function (me, items) {
                         if (items.length) {
                             var sum = 0,
                                 i = items.length;
-                            while(i--) {
+                            while (i--) {
                                 sum += items[i].storeItem.get('2007');
                             }
                             chartPanel.descriptionPanel.setTitle('Total: ' + sum);
@@ -75,8 +73,7 @@ Ext.regController('AnalyticsGraphController', {
                                 type: 'slide',
                                 direction: 'left'
                             });
-                        }
-                        else {
+                        } else {
                             chartPanel.headerPanel.setActiveItem(0, {
                                 type: 'slide',
                                 direction: 'right'
@@ -90,29 +87,29 @@ Ext.regController('AnalyticsGraphController', {
                     showInLegend: true,
                     highlight: false,
                     listeners: {
-                        'labelOverflow': function(label, item) {
+                        'labelOverflow': function (label, item) {
                             item.useCallout = true;
                         }
                     },
                     // Example to return as soon as styling arrives for callouts
                     callouts: {
-                        renderer: function(callout, storeItem) {
+                        renderer: function (callout, storeItem) {
                             callout.label.setAttributes({
                                 text: storeItem.get('name')
                             }, true);
                         },
-                        filter: function() {
+                        filter: function () {
                             return false;
                         },
                         box: {
-                          //no config here.
+                            //no config here.
                         },
                         lines: {
                             'stroke-width': 2,
                             offsetFromViz: 20
                         },
                         label: {
-                           font: 'italic 14px Arial'
+                            font: 'italic 14px Arial'
                         },
                         styles: {
                             font: '14px Arial'
@@ -123,51 +120,49 @@ Ext.regController('AnalyticsGraphController', {
                     }
                 }]
             }
-		 
-		});
-
+        });
     },
-    
-        'Bar': function (options) {
+    'bar': function (options) {
+        "use strict";
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
-         generateData2 = function(n, floor) {
-            var data = [],
-                p = (Math.random() * 11) + 1,
-                i;
+        var generateData2 = function (n, floor) {
+                var data = [],
+                    p = (Math.random() * 11) + 1,
+                    i;
 
-            floor = (!floor && floor !== 0) ? 20 : floor;
+                floor = (!floor && floor !== 0) ? 20 : floor;
 
-            for (i = 0; i < (n || 12); i++) {
-                data.push({
-                    name: Date.monthNames[i % 12],
-                    2008: Math.floor(Math.max((Math.random() * 100), floor)),
-                    2009: Math.floor(Math.max((Math.random() * 100), floor)),
-                    2010: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data4: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data5: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data6: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data7: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data8: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data9: Math.floor(Math.max((Math.random() * 100), floor))
-                });
-            }
-            return data;
-        };
+                for (i = 0; i < (n || 12); i++) {
+                    data.push({
+                        name: Date.monthNames[i % 12],
+                        2008: Math.floor(Math.max((Math.random() * 100), floor)),
+                        2009: Math.floor(Math.max((Math.random() * 100), floor)),
+                        2010: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data4: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data5: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data6: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data7: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data8: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data9: Math.floor(Math.max((Math.random() * 100), floor))
+                    });
+                }
+                return data;
+            };
         var store2 = new Ext.data.JsonStore({
             fields: ['name', '2008', '2009', '2010', 'data4', 'data5', 'data6', 'data7', 'data9', 'data9'],
             data: generateData2(5, 20)
         });
         var chartPanel = new Ext.chart.Panel({
-			renderTo:'canvas',
+            renderTo: 'canvas',
             title: 'Bar Chart',
             width: 1200,
-			height: 600,
-			id:'barchart',
+            height: 600,
+            id: 'barchart',
             items: {
                 cls: 'bar1',
                 theme: 'Demo',
-               	animate: true,
-				store: store2,
+                animate: true,
+                store: store2,
                 shadow: false,
                 legend: {
                     position: {
@@ -178,17 +173,14 @@ Ext.regController('AnalyticsGraphController', {
                 },
                 interactions: [{
                     type: 'reset'
-                },
-                {
+                }, {
                     type: 'togglestacked'
-                },
-                {
+                }, {
                     type: 'panzoom',
                     axes: {
                         left: {}
                     }
-                },
-                {
+                }, {
                     type: 'iteminfo',
                     gesture: 'taphold',
                     panel: {
@@ -201,18 +193,17 @@ Ext.regController('AnalyticsGraphController', {
                         html: 'Testing'
                     },
                     listeners: {
-                        'show': function(me, item, panel) {
+                        'show': function (me, item, panel) {
                             panel.update('<ul><li><b>Month:</b> ' + item.value[0] + '</li><li><b>Value: </b> ' + item.value[1] + '</li></ul>');
                         }
                     }
-                },
-                {
+                }, {
                     type: 'itemcompare',
                     offset: {
                         x: -10
                     },
                     listeners: {
-                        'show': function(interaction) {
+                        'show': function (interaction) {
                             var val1 = interaction.item1.value,
                                 val2 = interaction.item2.value;
 
@@ -222,7 +213,7 @@ Ext.regController('AnalyticsGraphController', {
                                 direction: 'left'
                             });
                         },
-                        'hide': function() {
+                        'hide': function () {
                             chartPanel.headerPanel.setActiveItem(0, {
                                 type: 'slide',
                                 direction: 'right'
@@ -235,14 +226,13 @@ Ext.regController('AnalyticsGraphController', {
                     position: 'bottom',
                     fields: ['2008', '2009', '2010'],
                     label: {
-                        renderer: function(v) {
+                        renderer: function (v) {
                             return v.toFixed(0);
                         }
                     },
                     title: 'Number of Hits',
                     minimum: 0
-                },
-                {
+                }, {
                     type: 'Category',
                     position: 'left',
                     fields: ['name'],
@@ -258,47 +248,45 @@ Ext.regController('AnalyticsGraphController', {
                 }]
             }
         });
-},
+    },
 
-     'Column': function (options) {
+    'column': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
-        
-        generateData3 = function(n, floor) {
-            var data = [],
-                p = (Math.random() * 11) + 1,
-                i;
+        var generateData3 = function (n, floor) {
+                var data = [],
+                    p = (Math.random() * 11) + 1,
+                    i;
 
-            floor = (!floor && floor !== 0) ? 20 : floor;
+                floor = (!floor && floor !== 0) ? 20 : floor;
 
-            for (i = 0; i < (n || 12); i++) {
-                data.push({
-                    name: Date.monthNames[i % 12],
-                    data1: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data2: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data3: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data4: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data5: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data6: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data7: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data8: Math.floor(Math.max((Math.random() * 100), floor)),
-                    data9: Math.floor(Math.max((Math.random() * 100), floor))
-                });
-            }
-            return data;
-        };
+                for (i = 0; i < (n || 12); i++) {
+                    data.push({
+                        name: Date.monthNames[i % 12],
+                        data1: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data2: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data3: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data4: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data5: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data6: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data7: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data8: Math.floor(Math.max((Math.random() * 100), floor)),
+                        data9: Math.floor(Math.max((Math.random() * 100), floor))
+                    });
+                }
+                return data;
+            };
         var store3 = new Ext.data.JsonStore({
             fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7', 'data9', 'data9'],
             data: generateData3(5, 20)
         });
-        
         var colors = ['url(#v-1)', 'url(#v-2)', 'url(#v-3)', 'url(#v-4)', 'url(#v-5)'];
-        
+
         var chartPanel = new Ext.chart.Panel({
-			renderTo:'canvas',
+            renderTo: 'canvas',
             title: 'Column Chart',
             width: 1200,
-			height: 600,
-			id:'columnchart',
+            height: 600,
+            id: 'columnchart',
             items: {
                 cls: 'column1',
                 animate: {
@@ -318,8 +306,7 @@ Ext.regController('AnalyticsGraphController', {
                             color: 'rgb(117, 14, 14)'
                         }
                     }
-                },
-                {
+                }, {
                     'id': 'v-2',
                     'angle': 0,
                     stops: {
@@ -330,8 +317,7 @@ Ext.regController('AnalyticsGraphController', {
                             color: 'rgb(94, 114, 13)'
                         }
                     }
-                },
-                {
+                }, {
                     'id': 'v-3',
                     'angle': 0,
                     stops: {
@@ -342,8 +328,7 @@ Ext.regController('AnalyticsGraphController', {
                             color: 'rgb(14, 117, 56)'
                         }
                     }
-                },
-                {
+                }, {
                     'id': 'v-4',
                     'angle': 0,
                     stops: {
@@ -354,8 +339,7 @@ Ext.regController('AnalyticsGraphController', {
                             color: 'rgb(14, 56, 117)'
                         }
                     }
-                },
-                {
+                }, {
                     'id': 'v-5',
                     'angle': 0,
                     stops: {
@@ -374,13 +358,12 @@ Ext.regController('AnalyticsGraphController', {
                     minimum: 0,
                     maximum: 100,
                     label: {
-                        renderer: function(v) {
+                        renderer: function (v) {
                             return v.toFixed(0);
                         }
                     },
                     title: 'Number of Hits'
-                },
-                {
+                }, {
                     type: 'Category',
                     position: 'bottom',
                     fields: ['name'],
@@ -390,12 +373,12 @@ Ext.regController('AnalyticsGraphController', {
                     type: 'column',
                     axis: 'left',
                     highlight: true,
-                    renderer: function(sprite, storeItem, barAttr, i, store) {
+                    renderer: function (sprite, storeItem, barAttr, i, store) {
                         barAttr.fill = colors[i % colors.length];
                         return barAttr;
                     },
                     label: {
-                      field: 'data1'
+                        field: 'data1'
                     },
                     xField: 'name',
                     yField: 'data1'
@@ -406,38 +389,38 @@ Ext.regController('AnalyticsGraphController', {
                 }]
             }
         });
-},
-     'Line': function (options) {
+    },
+    'line': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
-        
-        generateData4 = function(n, floor) {
-            var data = [],
-                p = (Math.random() *  11) + 1,
-                i;
+		"use strict";
+        var generateData4 = function (n, floor) {
+                var data = [],
+                    p = (Math.random() * 11) + 1,
+                    i;
 
-            floor = 10;
+                floor = 10;
 
-            for (i = 0; i < (n || 12); i++) {
-                data.push({
-                    name: Date.monthNames[i % 12],
-                    iphone: Math.floor(Math.max((Math.random() * 100), floor)),
-                    android: Math.floor(Math.max((Math.random() * 100), floor)),
-                    ipad: Math.floor(Math.max((Math.random() * 100), floor))
-                });
-            }
-            return data;
-        };
+                for (i = 0; i < (n || 12); i++) {
+                    data.push({
+                        name: Date.monthNames[i % 12],
+                        iphone: Math.floor(Math.max((Math.random() * 100), floor)),
+                        android: Math.floor(Math.max((Math.random() * 100), floor)),
+                        ipad: Math.floor(Math.max((Math.random() * 100), floor))
+                    });
+                }
+                return data;
+            };
         var store4 = new Ext.data.JsonStore({
             fields: ['name', 'iphone', 'android', 'ipad'],
             data: generateData4(5, 20)
         });
-        
+
         var chartPanel = new Ext.chart.Panel({
-			renderTo:'canvas',
+            renderTo: 'canvas',
             title: 'Line Chart',
             width: 1200,
-			height: 600,
-			id:'linechart',
+            height: 600,
+            id: 'linechart',
             items: {
                 cls: 'line1',
                 theme: 'Demo',
@@ -447,20 +430,20 @@ Ext.regController('AnalyticsGraphController', {
                 legend: {
                     position: 'right'
                 },
-               interactions: [{
-                type: 'panzoom',
+                interactions: [{
+                    type: 'panzoom',
                     axes: {
                         left: {}
                     }
                 }, {
-                   type: 'iteminfo',
-                   listeners: {
-                       show: function(interaction, item, panel) {
-                           var storeItem = item.storeItem;
-                           panel.update(['<ul><li><b>Month: </b>' + storeItem.get('name') + '</li>', '<li><b>Value: </b> ' + item.value[1]+ '</li></ul>'].join(''));
-                       }
-                   }
-               }],
+                    type: 'iteminfo',
+                    listeners: {
+                        show: function (interaction, item, panel) {
+                            var storeItem = item.storeItem;
+                            panel.update(['<ul><li><b>Month: </b>' + storeItem.get('name') + '</li>', '<li><b>Value: </b> ' + item.value[1] + '</li></ul>'].join(''));
+                        }
+                    }
+                }],
                 axes: [{
                     type: 'Numeric',
                     minimum: 0,
@@ -512,16 +495,16 @@ Ext.regController('AnalyticsGraphController', {
                 }]
             }
         });
-},
- 'Scatter': function (options) {
+    },
+    'scatter': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
-        
-        generateData5 = function(n, floor) {
+
+        generateData5 = function (n, floor) {
             var data = [],
-                p = (Math.random() *  11) + 1,
+                p = (Math.random() * 11) + 1,
                 i;
 
-            floor = (!floor && floor !== 0)? 20 : floor;
+            floor = (!floor && floor !== 0) ? 20 : floor;
 
             for (i = 0; i < (n || 12); i++) {
                 data.push({
@@ -543,13 +526,12 @@ Ext.regController('AnalyticsGraphController', {
             fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7', 'data9', 'data9'],
             data: generateData5(12, 20)
         });
-        
         var chartPanel = new Ext.chart.Panel({
-			renderTo:'canvas',
+            renderTo: 'canvas',
             title: 'Scatter Chart',
             width: 1200,
-			height: 600,
-			id:'scatterchart',
+            height: 600,
+            id: 'scatterchart',
             items: {
                 cls: 'scatter1',
                 theme: 'Demo',
@@ -588,16 +570,17 @@ Ext.regController('AnalyticsGraphController', {
                 }]
             }
         });
-},
+    },
 
- 'Area': function (options) {
+    'area': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
-        
-        generateData6 = function(n, floor) {
+
+        generateData6 = function (n, floor) {
+			"use strict";
             var data = [],
                 i;
 
-            floor = (!floor && floor !== 0)? 20 : floor;
+            floor = (!floor && floor !== 0) ? 20 : floor;
 
             for (i = 0; i < (n || 12); i++) {
                 data.push({
@@ -618,13 +601,13 @@ Ext.regController('AnalyticsGraphController', {
             data: generateData6(5, 20)
         });
 
-        
+
         var chartPanel = new Ext.chart.Panel({
-			renderTo:'canvas',
+            renderTo: 'canvas',
             title: 'Area Chart',
             width: 1200,
-			height: 600,
-			id:'areachart',
+            height: 600,
+            id: 'areachart',
             items: {
                 cls: 'area1',
                 theme: 'Demo',
@@ -659,116 +642,112 @@ Ext.regController('AnalyticsGraphController', {
                 }]
             }
         });
-},
- 'Stock': function (options) {
+    },
+    'stock': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
-        
-		function generateData7(){
-        var today = new Date(),
-            before = today.add(Date.DAY, -200),
-            data = [{
-                date: before,
-                num: 0,
-                djia: 10000,
-                sp500: 1100
-            }],
-            i, currentDate = before;
 
-        for (i = 1; i < 200; i++) {
-            data.push({
-                date: (currentDate = currentDate.add(Date.DAY, 1)),
-                num: i,
-                sp500: data[i - 1].sp500 + ((Math.floor(Math.random() * 2) % 2) ? -1 : 1) * Math.floor(Math.random() * 7),
-                djia: data[i - 1].djia + ((Math.floor(Math.random() * 2) % 2) ? -1 : 1) * Math.floor(Math.random() * 7)
-            });
+        function generateData7() {
+			"use strict";
+            var today = new Date(),
+                before = today.add(Date.DAY, -200),
+                data = [{
+                    date: before,
+                    num: 0,
+                    djia: 10000,
+                    sp500: 1100
+                }],
+                i, currentDate = before;
+
+            for (i = 1; i < 200; i++) {
+                data.push({
+                    date: (currentDate = currentDate.add(Date.DAY, 1)),
+                    num: i,
+                    sp500: data[i - 1].sp500 + ((Math.floor(Math.random() * 2) % 2) ? -1 : 1) * Math.floor(Math.random() * 7),
+                    djia: data[i - 1].djia + ((Math.floor(Math.random() * 2) % 2) ? -1 : 1) * Math.floor(Math.random() * 7)
+                });
+            }
+            return data;
         }
-        return data;
-    }
 
-    var store7 = new Ext.data.JsonStore({
-        fields: ['date', 'num', 'sp500', 'djia'],
-        data: generateData7()
-    });
-     store7.loadData(generateData7());
-        
+        var store7 = new Ext.data.JsonStore({
+            fields: ['date', 'num', 'sp500', 'djia'],
+            data: generateData7()
+        });
+        store7.loadData(generateData7());
         var chartPanel = new Ext.chart.Panel({
-			renderTo:'canvas',
+            renderTo: 'canvas',
             title: 'Stock Analysis',
             width: 1200,
-			height: 600,
-			id:'stockchart',
+            height: 600,
+            id: 'stockchart',
             items: {
-            cls: 'stock1',
-            theme: 'Demo',
-            legend: {
-                position: {
-                    portrait: 'right',
-                    landscape: 'top'
+                cls: 'stock1',
+                theme: 'Demo',
+                legend: {
+                    position: {
+                        portrait: 'right',
+                        landscape: 'top'
+                    },
+                    labelFont: '17px Arial'
                 },
-                labelFont: '17px Arial'
-            },
-            interactions: [{
-                type: 'panzoom',
-                axes: {
-                    left: {
-                        maxZoom: 2
-                    },
-                    bottom: {
-                        maxZoom: 4
-                    },
-                    right: {
-                        minZoom: 0.5,
-                        maxZoom: 4,
-                        allowPan: false
+                interactions: [{
+                    type: 'panzoom',
+                    axes: {
+                        left: {
+                            maxZoom: 2
+                        },
+                        bottom: {
+                            maxZoom: 4
+                        },
+                        right: {
+                            minZoom: 0.5,
+                            maxZoom: 4,
+                            allowPan: false
+                        }
                     }
-                }
-            }],
-            animate: false,
-            store: store7,
-            axes: [{
-                type: 'Numeric',
-                position: 'left',
-                fields: ['djia'],
-                title: 'Dow Jones Average'
-            }, {
-                type: 'Numeric',
-                position: 'right',
-                fields: ['sp500'],
-                title: 'S&P 500'
-            }, {
-                type: 'Time',
-                position: 'bottom',
-                fields: ['date'],
-                dateFormat: ' M d ',
-                label: {
-                    rotate: {
-                        degrees: 45
+                }],
+                animate: false,
+                store: store7,
+                axes: [{
+                    type: 'Numeric',
+                    position: 'left',
+                    fields: ['djia'],
+                    title: 'Dow Jones Average'
+                }, {
+                    type: 'Numeric',
+                    position: 'right',
+                    fields: ['sp500'],
+                    title: 'S&P 500'
+                }, {
+                    type: 'Time',
+                    position: 'bottom',
+                    fields: ['date'],
+                    dateFormat: ' M d ',
+                    label: {
+                        rotate: {
+                            degrees: 45
+                        }
                     }
-                }
-            }],
-            series: [{
-                type: 'line',
-                showMarkers: false,
-                smooth: true,
-                axis: 'left',
-                xField: 'date',
-                yField: 'djia'
-            }, {
-                type: 'line',
-                showMarkers: false,
-                fill: true,
-                axis: 'right',
-                xField: 'date',
-                yField: 'sp500'
-            }]
-        }
+                }],
+                series: [{
+                    type: 'line',
+                    showMarkers: false,
+                    smooth: true,
+                    axis: 'left',
+                    xField: 'date',
+                    yField: 'djia'
+                }, {
+                    type: 'line',
+                    showMarkers: false,
+                    fill: true,
+                    axis: 'right',
+                    xField: 'date',
+                    yField: 'sp500'
+                }]
+            }
         });
-}
+    }
 
-
-
-    
-    
- });   
+});
 
 AnalyticsApp.controllers.analyticsGraphController = Ext.ControllerManager.get('AnalyticsGraphController');
