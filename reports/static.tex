@@ -1,4 +1,8 @@
 \subsection{Static Code Analysis} % (fold)
 \label{sub:Static Code Analysis}
+There are not that many static code analysis tools for JavaScript. Mostly, people recommend JSlint (http://www.jslint.com/). We also looked at http://www.brics.dk/TAJS/, but we could not find any way to download it, so we had to stick with JSlint. The downside with using JSlint is that it is only for online use. Making it a cumbersome process to check a lot of code. 
+Instead we used both a commmand line interface version of JSlint, via the node.js package manager and JShint, (http://www.jshint.com/) that has plugins for different text-editors. We also looked at Google's closure compiler, (https://developers.google.com/closure/), which both does static code analysis and minification of the code.\\
+Futher down the line we would like to integrate static code analysis in the build process. We will most likely be using Google's closure compiler to do that. Or just use coffeescript, (http://coffeescript.org/) which compiles to JavaScript, through JSlint.\\
+Using JSlint on our project in its current state did not reveal any critical bugs in our code. Mostly JSlint complains about wrong indentation
 
 % subsection Static Code Analysis (end)
