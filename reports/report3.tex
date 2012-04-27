@@ -12,6 +12,7 @@
 % Setup for fullpage use
 \usepackage{fullpage}
 
+\usepackage{pdfpages}
 % Uncomment some of the following if you use the features
 %
 % Running Headers and footers
@@ -45,11 +46,7 @@
 %\pdftrue
 %\fi
 
-\ifpdf
-\usepackage[pdftex]{graphicx}
-\else
-\usepackage{graphicx}
-\fi
+\usepackage{ifpdf}
 \title{ Project Course: Development Studio \\ Deliverable 3: Sprint \#2}
 \author{ Asger Pedersen, Kristoffer Cobley, Hari Charan \& Jesper Tved }
 \setlength{\parindent}{0pt}
@@ -79,6 +76,9 @@
 \include{testing}
 \include{static}
 
+\includepdf[pages={-}]{images/backlog1.pdf}
+\includepdf[pages={-}]{images/sprint1.pdf}
+
 \bibliographystyle{plain}
 \bibliography{}
-\end{document}			
+\end{document}
