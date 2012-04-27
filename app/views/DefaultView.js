@@ -91,5 +91,3 @@ AnalyticsApp.views.DefaultView1 = Ext.extend(Ext.form.FormPanel, {
         label: 'Narrative'
     }]
 });
-
-

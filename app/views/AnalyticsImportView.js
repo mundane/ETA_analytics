@@ -92,5 +92,3 @@ AnalyticsApp.views.AnalyticsImportView = Ext.extend(Ext.form.FormPanel, {
     }]
 
 });
-
-

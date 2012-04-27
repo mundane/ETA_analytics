@@ -8,14 +8,14 @@
             notesListView: new AnalyticsApp.views.NotesListView({ analyticsStore: AnalyticsApp.stores.analyticsStore }),
             noteEditorView: new AnalyticsApp.views.NoteEditorView(),
             analyticsImportView: new AnalyticsApp.views.AnalyticsImportView(),
-            analyticsGridView: new AnalyticsApp.views.AnalyticsGridView()
+            analyticsGridView: new AnalyticsApp.views.AnalyticsGridView(),
         });
 
         this.items = [
             AnalyticsApp.views.notesListView,
             AnalyticsApp.views.noteEditorView,
             AnalyticsApp.views.analyticsImportView,
-            AnalyticsApp.views.analyticsGridView
+            AnalyticsApp.views.analyticsGridView,
         ];
 
         AnalyticsApp.views.MainView.superclass.initComponent.call(this);
