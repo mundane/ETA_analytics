@@ -1,0 +1,88 @@
+%
+%  untitled
+%
+%  Created by Asger Pedersen on 2012-01-04.
+%  Copyright (c) 2012 . All rights reserved.
+%
+\documentclass[]{article}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Setup for fullpage use
+\usepackage{fullpage}
+
+\usepackage{pdfpages}
+% Uncomment some of the following if you use the features
+%
+% Running Headers and footers
+%\usepackage{fancyhdr}
+
+% Multipart figures
+%\usepackage{subfigure}
+
+% More symbols
+%\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{latexsym}
+
+% Surround parts of graphics with box
+\usepackage{boxedminipage}
+
+% Package for including code in the document
+\usepackage{listings}
+
+% If you want to generate a toc for each chapter (use with book)
+\usepackage{minitoc}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+%\newif\ifpdf
+%\ifx\pdfoutput\undefined
+%\pdffalse % we are not running PDFLaTeX
+%\else
+%\pdfoutput=1 % we are running PDFLaTeX
+%\pdftrue
+%\fi
+
+\usepackage{ifpdf}
+\title{ Project Course: Development Studio \\ Deliverable 4: Sprint \#3}
+\author{ Asger Pedersen, Kristoffer Cobley, Hari Charan \& Jesper Tved }
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+\linespread{1.3}
+
+\begin{document}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\maketitle
+\setcounter{tocdepth}{1}
+\tableofcontents
+\newpage
+\include{sprint}
+
+\include{retrospective}
+
+\section{Learning Goals} % (fold)
+\label{sec:Learning Goals}
+
+% section Learning Goals (end)
+\include{arcdesc}
+\include{entdoc}
+\appendix
+\section{Scrum Material} % (fold)
+\label{sec:Scrum Material}
+
+% section Scrum Material (end)
+%\includepdf[pages={-}]{images/backlog1.pdf}
+%\includepdf[pages={-}]{images/sprint1.pdf}
+
+\bibliographystyle{plain}
+\bibliography{}
+\end{document}
