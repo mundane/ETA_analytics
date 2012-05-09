@@ -1,0 +1,25 @@
+{
+   "repository" : null,
+   "directories" : {
+      "man" : "./man",
+      "lib" : "./lib",
+      "doc" : "./doc/mmd"
+   },
+   "version" : "1.0.8",
+   "dependencies" : {
+      "joose" : ">= 3.50.0",
+      "data-visitor2" : "*",
+      "joosex-observable" : "*",
+      "joosex-simplerequest" : ">= 0.2.2",
+      "scope-provider" : ">= 0.11.0",
+      "kiokujs-backend-couchdb" : "*"
+   },
+   "name" : "siesta",
+   "author" : "Nickolay Platonov <nplatonov@cpan.org>",
+   "description" : "JavaScript unit testing, without stress",
+   "main" : "siesta-all-nodejs.js",
+   "homepage" : "http://bryntum.com/siesta",
+   "contributors" : [
+      "Mats Bryntse <mats@bryntum.com>"
+   ]
+}

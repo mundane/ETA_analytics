@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+
+Siesta 1.0.8
+Copyright(c) 2009-2012 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+<span id='Siesta-Harness-Browser'>/**
+</span>@class Siesta.Harness.Browser
+@extends Siesta.Harness 
+
+Class, representing the browser harness. This class provides a web-based UI and defines some additional configuration options.
+
+The default value of the `testClass` configuration option in this class is {@link Siesta.Test.Browser}, which contains
+only generic browser-related assertions. So, use this harness class, when testing a generic web page.
+
+This file is for reference only, for a getting start guide and manual, please refer to &lt;a href=&quot;#!/guide/siesta_getting_started&quot;&gt;Getting Started Guide&lt;/a&gt;.
+
+
+Synopsys
+========
+
+    var Harness = Siesta.Harness.Browser;
+    
+    Harness.configure({
+        title     : 'Awesome Test Suite',
+        
+        transparentEx       : true,
+        
+        autoCheckGlobals    : true,
+        expectedGlobals     : [
+            'Ext',
+            'Sch'
+        ],
+        
+        preload : [
+            &quot;http://cdn.sencha.io/ext-4.0.2a/ext-all-debug.js&quot;,
+            &quot;../awesome-project-all.js&quot;,
+            {
+                text    : &quot;console.log('preload completed')&quot;
+            }
+        ]
+    })
+    
+    
+    Harness.start(
+        // simple string - url relative to harness file
+        'sanity.t.js',
+        
+        // test file descriptor with own configuration options
+        {
+            url     : 'basic.t.js',
+            
+            // replace `preload` option of harness
+            preload : [
+                &quot;http://cdn.sencha.io/ext-4.0.6/ext-all-debug.js&quot;,
+                &quot;../awesome-project-all.js&quot;
+            ]
+        },
+        
+        // groups (&quot;folders&quot;) of test files (possibly with own options)
+        {
+            group       : 'Sanity',
+            
+            autoCheckGlobals    : false,
+            
+            items       : [
+                'data/crud.t.js',
+                ...
+            ]
+        },
+        ...
+    )
+
+
+
+*/
+
+Class('Siesta.Harness.Browser', {
+    
+    // static
+    my : {
+        isa         : Siesta.Harness,
+        
+        has : {
+<span id='Siesta-Harness-Browser-cfg-testClass'>            /**
+</span>             * @cfg {Class} testClass The test class which will be used for creating test instances, defaults to {@link Siesta.Test.Browser}.
+             * You can subclass {@link Siesta.Test.Browser} and provide a new class. 
+             * 
+             * This option can be also specified in the test file descriptor. 
+             */
+            testClass           : Siesta.Test.Browser,
+            
+            viewportClass       : &quot;Siesta.Harness.Browser.UI.Viewport&quot;,
+
+            viewport            : null,
+            
+<span id='Siesta-Harness-Browser-cfg-autoRun'>            /**
+</span>             * @cfg {Boolean} autoRun When set to `true`, harness will automatically launch the execution either of the checked test files or the whole suite.
+             * Default value is `false`
+             */
+            autoRun             : false,
+            
+<span id='Siesta-Harness-Browser-cfg-viewDOM'>            /**
+</span>             * @cfg {Boolean} viewDOM When set to `true`, harness will expand the panel with the `&lt;iframe&gt;` of the test file, so you can examine the content of DOM.
+             * Default value is `false`
+             */
+            viewDOM             : false,
+            
+<span id='Siesta-Harness-Browser-cfg-speedRun'>            /**
+</span>             * @cfg {Boolean} speedRun When set to `true`, harness will reduce the quality or completely remove the visual effects for events simulation,
+             * improving the speed of test. Default value is `true`.
+             * 
+             * This option can be also specified in the test file descriptor.
+             */
+            speedRun            : true,
+
+<span id='Siesta-Harness-Browser-cfg-breakOnFail'>            /**
+</span>             * @cfg {Boolean} breakOnFail When set to `true`, harness will not start launching any further tests after detecting a failed assertion.
+             * improving the speed of test. Default value is `false`.   
+             */
+            breakOnFail         : false,
+
+            contentManagerClass : Siesta.Content.Manager.Browser,
+            scopeProvider       : 'Scope.Provider.IFrame',
+            
+<span id='Siesta-Harness-Browser-cfg-disableCaching'>            /**
+</span>             * @cfg {Boolean} disableCaching When set to `true`, harness will prevent the browser caching of files being preloaded and the test files, by appending
+             * a query string to it.
+             * Note, that in this case, debuggers may not understand that you are actually loading the same file, and breakpoints may not work. Default value is `false`
+             */
+            disableCaching      : false,
+            
+            baseUrl             : window.location.href.replace(/\?.*$/,'').replace(/\/[^/]*$/, '/'),
+            baseHost            : window.location.host,
+            baseProtocol        : window.location.protocol,
+            
+<span id='Siesta-Harness-Browser-cfg-forceDOMVisible'>            /**
+</span>             * @cfg {Boolean} forceDOMVisible When set to `true` the tests will be ran in &quot;fullscreen&quot; mode, with their iframes on top of all other elements.
+             * This is required in IE if your test includes interaction with the DOM, for example when using `document.getElementFromPoint()` method (it will not work unless the element
+             * is visible).
+             * 
+             * This option can be also specified in the test file descriptor (usually you will create a group of &quot;rendering&quot; tests). Usually its only relevant for IE, 
+             * so the usage may looks like:
+             *
+             * This option is enabled by default in IE and disabled in all other browsers.
+             * 
+    Harness.start(
+        {
+            group       : 'Rendering',
+            
+            forceDOMVisible    : $.browser.msie,
+            
+            items       : [
+                'rendering/01_grid.t.js',
+                ...
+            ]
+        },
+        ...
+    )
+            
+             */
+            forceDOMVisible     : $.browser.msie,
+            
+            
+<span id='Siesta-Harness-Browser-cfg-hostPageUrl'>            /**
+</span>             * @cfg {String} hostPageUrl The url of the html page which will be used for tests. 
+             * 
+             * **Note**, that {@link #preload} option will still be in effect, so make sure you don't double load your dependencies.
+             * 
+             * This option can be also specified in the test file descriptor.
+             * 
+             * For example, to define that test should be executed on the page generated by some php script:
+    Harness.start(
+        {
+            hostPageUrl     : '../my_php_script?page=home',     // url of the html page for test
+            url             : '020_home_page_drag_n_drop.t.js'  // url of the js file, containing actual test code
+        },
+        ...
+    )
+             *  
+             * 
+             */
+            hostPageUrl         : null,
+            
+            
+<span id='Siesta-Harness-Browser-cfg-useStrictMode'>            /**
+</span>             * @cfg {Boolean} useStrictMode When set to `false` the test scopes will be created w/o strict mode `DOCTYPE`. Default value is `true`.
+             * This option is not applicable for tests with `hostPageUrl` option. 
+             * 
+             * This option can be also specified in the test file descriptor.
+             */
+            useStrictMode       : true,
+            
+            
+<span id='Siesta-Harness-Browser-cfg-runCore'>            /**
+</span>             * @cfg {String} runCore Either `parallel` or `sequential`. Indicates how the individual tests should be run - several at once or one-by-one.
+             * 
+             * Default value is &quot;parallel&quot;, except of IE 6, 7, 8 where its set to `sequential`. You do not need to change this option usually.
+             */
+            runCore                 : 'parallel',
+            
+            
+<span id='Siesta-Harness-Browser-cfg-suppressEventsLog'>            /**
+</span>             * @cfg {Boolean} suppressEventsLog When set to `true` the harness will not create entries for events simulation in log. 
+             * 
+             * Default value is `true`
+             * 
+             * This option can be also specified in the test file descriptor.
+             */
+            suppressEventsLog   : true,
+            
+            
+<span id='Siesta-Harness-Browser-cfg-simulateEventsWith'>            /**
+</span>             * @cfg {String} simulateEventsWith
+             * 
+             * This option is IE9-strict mode (and probably above) specific. It specifies, which events simulation function Siesta should use. 
+             * The choice is between 'dispatchEvent' (W3C standard) and 'fireEvent' (MS interface) - both are available in IE9 strict mode
+             * and each activates different set of event listeners. See this blog post for detailed explanations: 
+             * &lt;http://www.digitalenginesoftware.com/blog/archives/76-DOM-Event-Model-Compatibility-or-Why-fireEvent-Doesnt-Trigger-addEventListener.html&gt;
+             * 
+             * Valid values are &quot;dispatchEvent&quot; and &quot;fireEvent&quot;.
+             * 
+             * The framework specific adapters (like {@link Siesta.Test.ExtJS} and like {@link Siesta.Test.jQuery}) chooses the most appropriate value 
+             * automatically (unless explicitly configured). 
+             */
+            simulateEventsWith  : {
+                is      : 'rw',
+                init    : 'dispatchEvent'
+            },
+            
+            // the currently &quot;forced&quot; (by the &quot;forceDOMVisible&quot; option) iframe 
+            currentlyForcedIFrame       : null,
+            testOfForcedIFrame          : null,
+            
+            // docs are below to disable the &quot;defaults&quot; auto-detection
+            minViewportSize     : {
+                init    : {
+                    width       : 1024,
+                    height      : 768
+                }
+            },
+            
+<span id='Siesta-Harness-Browser-cfg-minViewportSize'>            /**
+</span>             * @cfg {Object} minViewportSize 
+             * 
+             * Minimal size of the test's viewport (usually size of the iframe with the test page). This option is useful, when your tests expects page
+             * to have certain minimal size. However it may cause the misplacement of the whole harness UI in Chrome, in case when minimal size is bigger than
+             * place for iframe.  
+             * 
+             * Should be an object with the following properties:
+             * 
+             * @cfg {Number} minViewportSize.width Minimal width, default value is 1024
+             * @cfg {Number} minViewportSize.height Minimal height, default value is 768
+             * 
+             * **This is option is only active when {@link #maintainMinViewportSize} is enabled.**
+             * 
+             * This option can also be specified in the test file descriptor.
+             */
+            
+<span id='Siesta-Harness-Browser-cfg-maintainMinViewportSize'>            /**
+</span>             * @cfg {Boolean} maintainMinViewportSize
+             * 
+             * Enabling this option will cause Siesta to honor the {@link #minViewportSize} configuration option.
+             * 
+             * This option can also be specified in the test file descriptor.
+             */
+            maintainMinViewportSize     : false
+        },
+        
+        
+        after : {
+            
+            onBeforeScopePreload : function (scopeProvider, url) {
+                if (this.viewport) this.viewport.onBeforeScopePreload(scopeProvider, url)
+            },
+            
+            
+            onTestSuiteStart : function (descriptors, contentManager) {
+                if (this.viewport) this.viewport.onTestSuiteStart(descriptors, contentManager)
+            },
+            
+            
+            onTestSuiteEnd : function (descriptors, contentManager) {
+                if (this.viewport) this.viewport.onTestSuiteEnd(descriptors, contentManager)
+                
+                // remove the links to forced iframe / test in hope to ease the memory pressure
+                delete this.currentlyForcedIFrame
+                delete this.testOfForcedIFrame
+            },
+            
+            
+            onTestStart : function (test) {
+                if (this.viewport) this.viewport.onTestStart(test)
+                
+                var iframe
+                
+                if (iframe = this.testHasForcedIframe(test)) {
+                    if (this.currentlyForcedIFrame) this.hideForcedIFrame(this.currentlyForcedIFrame)
+                
+                    this.showForcedIFrame(iframe, test)
+                
+                    this.currentlyForcedIFrame  = iframe
+                    this.testOfForcedIFrame     = test
+                }        
+            },
+            
+            
+            onTestUpdate : function (test, result) {
+                if (this.viewport) this.viewport.onTestUpdate(test, result)
+            },
+            
+            
+            onTestEnd : function (test) {
+                var iframe
+                
+                if (iframe = this.testHasForcedIframe(test)) {
+                
+                    this.hideForcedIFrame(iframe)
+                
+                    this.currentlyForcedIFrame  = null
+                    this.testOfForcedIFrame     = null
+                }
+                
+                if (this.viewport) this.viewport.onTestEnd(test)
+            },
+            
+            
+            onTestFail : function (test, exception, stack) {
+                if (this.viewport) this.viewport.onTestFail(test, exception, stack)
+            }
+        },
+        
+        
+        methods : {
+            
+            isAutomated : function () {
+                return false
+            },
+            
+            
+            start : function () {
+                // Opera's global variables handling is weird
+                if ($.browser.opera) {
+                    this.autoCheckGlobals = false;
+                }
+                
+                if ($.browser.msie &amp;&amp; $.browser.version !== &quot;9.0&quot;) {
+                    if (!this.hasOwnProperty('runCore'))            this.runCore            = 'sequential'
+                    if (!this.hasOwnProperty('suppressEventsLog'))  this.suppressEventsLog  = true
+                }
+                
+                this.SUPERARG(arguments)
+            },
+            
+            
+            launch : function () {
+                var me = this
+                
+                
+                if (!this.viewport &amp;&amp; !this.isAutomated()) 
+                    Ext.onReady(function () {
+                        Ext.QuickTips.init();
+                        
+                        me.viewport = Ext.create(me.viewportClass, {
+                            title           : me.title,
+                            harness         : me
+                        })
+                    }) 
+                else
+                    this.SUPERARG(arguments)
+            },
+            
+            
+            populateCleanScopeGlobals : function (scopeProvider, callback) {
+                if ($.browser.msie &amp;&amp; Number(/^(\d+)/.exec($.browser.version)[ 1 ]) &lt; 9) {
+                    // do nothing for IE &lt; 9 - testing leakage of globals is not supported
+                    // also IE8 often crashes on this stage
+                    this.disableGlobalsCheck = true
+                    
+                    callback()
+                    
+                    return
+                }
+                
+                // always populate the globals from IFrame (even if user specified the Window provider)
+                this.SUPER('Scope.Provider.IFrame', callback)
+            },
+            
+            
+            setup : function (callback) {
+                var me      = this
+                var sup     = this.SUPER
+
+                // delay the super setup until dom ready
+                if (!this.isAutomated()) {
+                    Ext.onReady(function () {
+                        Siesta.supports.init();
+                    
+                        sup.call(me, callback);
+                    });
+                } else {
+                    $(function () {
+                        Siesta.supports.init();
+                    
+                        sup.call(me, callback);
+                    });
+                }
+            },
+            
+            
+            getScopeProviderConfigFor : function (desc) {
+                var config                      = this.SUPER(desc)
+                
+                config.sourceURL                = config.sourceURL || this.getDescriptorConfig(desc, 'hostPageUrl')
+                config.minViewportSize          = config.minViewportSize || this.getDescriptorConfig(desc, 'minViewportSize')
+                config.maintainMinViewportSize  = config.maintainMinViewportSize || this.getDescriptorConfig(desc, 'maintainMinViewportSize')
+                
+                if (!config.hasOwnProperty('useStrictMode')) config.useStrictMode = this.getDescriptorConfig(desc, 'useStrictMode')
+                
+                return config
+            },
+            
+            
+            getNewTestConfiguration : function (desc, scopeProvider, contentManager, options, runFunc) {
+                var config          = this.SUPERARG(arguments)
+                
+                if (this.getDescriptorConfig(desc, 'speedRun')) {
+                    
+                    Joose.O.extend(config, {
+                        actionDelay         : 1,
+                        dragPrecision       : 20,
+                        dragDelay           : 10
+                    })
+                }
+                
+                config.suppressEventsLog    = this.getDescriptorConfig(desc, 'suppressEventsLog')
+                
+                if (this.hasOwnProperty('simulateEventsWith')) config.simulateEventsWith = this.simulateEventsWith
+                
+                return config
+            },
+            
+            
+            runCoreGeneral : function (descriptors, contentManager, options, callback) {
+                
+                if (this.runCore == 'parallel') {
+                    
+                    var me                  = this
+                    var canRunParallel      = []
+                    var mustRunSequential   = []
+                    
+                    Joose.A.each(descriptors, function (desc) {
+                        
+                        if (me.getDescriptorConfig(desc, 'forceDOMVisible'))
+                            mustRunSequential.push(desc)
+                        else
+                            canRunParallel.push(desc)
+                    })
+                    
+                    this.runCoreParallel(canRunParallel, contentManager, options, function () {
+                        
+                        setTimeout(function () {
+                            
+                            me.runCoreSequential(mustRunSequential, contentManager, options, callback)
+                            
+                        }, 100)
+                    })
+                
+                } else
+                    this.SUPERARG(arguments)
+            },
+            
+            
+            normalizeURL : function (url) {
+                // ref to JSAN module - DEPRECATED
+                if (/^jsan:/.test(url)) url = '/jsan/' + url.replace(/^jsan:/, '').replace(/\./g, '/') + '.js'
+                
+                // ref to lib in current dist (no `/` and trailing `.js`) 
+                if (!/\.js$/.test(url) &amp;&amp; !/\//.test(url)) url = '../lib/' + url.replace(/\./g, '/') + '.js'
+                
+                return url
+            },
+            
+            
+            resolveURL : function (url, scopeProvider, desc) {
+                
+                // if the `scopeProvider` is provided and it has a sourceURL - then absolutize the preloads relative to that url
+                if (scopeProvider &amp;&amp; scopeProvider.sourceURL) url = this.absolutizeURL(url)
+                
+                if (this.disableCaching)
+                    // if there's a ?param string in url - append new param
+                    if (/\?./.test(url))
+                        url += '&amp;disableCaching=' + new Date().getTime()
+                    else
+                        if (!/\?$/.test(url)) 
+                            url += '?disableCaching=' + new Date().getTime()
+                
+                // otherwise assumed to be a raw filename, relative or absolute
+                return url
+            },
+            
+            
+            absolutizeURL : function (url, baseUrl) {
+                // if the url is already absolute - just return it (perhaps with some normalization - 2nd case)
+                if (/^http/.test(url))  return url
+                if (/^\//.test(url))    return this.baseProtocol + '//' + this.baseHost + url
+                
+                baseUrl             = baseUrl || this.baseUrl
+                
+                // strip the potential query and filename from baseURL, leaving only the &quot;directory&quot; part
+                baseUrl             = baseUrl.replace(/\?.*$/,'').replace(/\/[^/]*$/, '/')
+                
+                // first absolutize the base url relative the harness page (which will be always global, so it won't recurse)
+                var absBaseUrl      = this.absolutizeURL(baseUrl, this.baseUrl)
+                
+                // add a trailing &quot;/&quot; if missing
+                absBaseUrl          = absBaseUrl.replace(/\/?$/, '/')
+                
+                return absBaseUrl + url
+            },
+            
+            
+            // encapsulates the dirty-ness of the &quot;forcedIframe&quot; logic
+            testHasForcedIframe : function (test) {
+                if (this.getDescriptorConfig(this.getScriptDescriptor(test.url), 'forceDOMVisible') &amp;&amp; (test.scopeProvider instanceof Scope.Provider.IFrame))
+                    return test.scopeProvider.iframe
+                else
+                    return null
+            },
+            
+            
+            showForcedIFrame : function (iframe, test) {
+                var desc                    = this.getScriptDescriptor(test.url)
+
+                var minViewportWidth        = 0
+                var minViewportHeight       = 0
+                
+                if (this.getDescriptorConfig(desc, 'maintainMinViewportSize')) {
+                    var minViewportSize     = this.getDescriptorConfig(desc, 'minViewportSize')
+                    
+                    minViewportWidth        = minViewportSize &amp;&amp; minViewportSize.width || 1024
+                    minViewportHeight       = minViewportSize &amp;&amp; minViewportSize.height || 768
+                }
+                
+                Ext.fly(iframe).setStyle({
+                    width       : Math.max(Ext.core.Element.getViewportWidth()  * 0.8 + 'px', minViewportWidth),
+                    height      : Math.max(Ext.core.Element.getViewportHeight() * 0.8 + 'px', minViewportHeight),
+                
+                    'z-index'   : 100000,
+                
+                    border                      : '5px solid',
+                    'border-color'              : '#d5e7f0',
+                    '-moz-border-radius'        : '14px',
+                    '-webkit-border-radius'     : '14px',
+                    'border-radius'             : '14px'
+                })
+            
+                Ext.fly(iframe).center()
+            },
+        
+        
+            hideForcedIFrame : function (iframe) {
+                Ext.fly(iframe).setStyle({
+                    left        : '-10000px',
+                    top         : '-10000px',
+                
+                    'z-index'   : '',
+                    border      : ''
+                })
+            }
+        }
+        
+    }
+    //eof my
+})
+//eof Siesta.Harness.Browser
+
+
+</pre>
+</body>
+</html>

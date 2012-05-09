@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+
+Siesta 1.0.8
+Copyright(c) 2009-2012 Bryntum AB
+http://bryntum.com/contact
+http://bryntum.com/products/siesta/license
+
+*/
+Ext.define('Siesta.Harness.Browser.UI.MouseVisualizer', {
+
+    displaySimulationTip : false,
+    displayClickIndicator : true,
+
+    ghostCursor             : null,
+    viewport                : null,
+
+
+    constructor : function(harness) {
+        this.harness = harness;
+        this.callParent([]);
+    },
+
+    init : function(viewport) { 
+        this.viewport = viewport;
+
+        if (!this.ghostCursor) {
+            this.ghostCursor = Ext.getBody().createChild({
+                tag : 'div',
+                cls : 'ghost-cursor'
+            });
+        }
+  
+        this.harness.on('eventsimulated', this.onEventSimulated, this);
+        this.harness.on('teststart', this.onTestStart, this);
+        this.harness.on('testfinalize', this.onTestFinished, this);
+    },
+
+    onTestFinished : function(meta, test) {
+        var me = this;
+        clearTimeout(me.hideTimer);
+
+        me.hideTimer = setTimeout(function() {
+            me.ghostCursor.fadeOut({ duration : 1500 });
+            if (me.viewport.isTestRunningVisible(test)) {
+                Ext.select('.ghost-cursor-click-indicator').destroy();
+            }
+        }, 2000);
+    },
+
+    onTestStart : function(meta, test) {
+        if (this.viewport.isTestRunningVisible(test)) {
+            // Cancel any ongoing fadeOut operation
+            this.ghostCursor.stopAnimation();
+            this.ghostCursor.setOpacity(1);
+        }
+    },
+
+    onEventSimulated : function(meta, test, el, type, evt) {
+        // Make sure this test is visible in DOM right now
+        if (test.scopeProvider.iframe &amp;&amp; type.match('touch|mouse|click|contextmenu') &amp;&amp; this.viewport.isTestRunningVisible(test) &amp;&amp;
+            Ext.isNumber(evt.clientX) &amp;&amp; Ext.isNumber(evt.clientY)) {
+            var bd = Ext.getBody(),
+                frameOffsets = Ext.fly(test.scopeProvider.iframe).getOffsetsTo(bd),
+                x = evt.clientX + frameOffsets[0],
+                y = evt.clientY + frameOffsets[1];
+    
+            this.updateGhostCursor(type, x, y);
+             
+            if (Ext.supports.Transitions) {
+                if (this.displaySimulationTip &amp;&amp;
+                   (type === 'mousedown' ||
+                    type === 'mouseup' ||
+                    type === 'click')) {
+                    this.showSimulationTip(type, x, y);
+                }
+
+                 if (this.displayClickIndicator &amp;&amp; (
+                    type === 'click' || 
+                    type === 'dblclick' || 
+                    type === 'touchstart' || 
+                    type === 'touchend' || 
+                    type === 'mousedown' || 
+                    type === 'mouseup' || 
+                    type === 'contextmenu')) {
+                    this.showClickIndicator(type, x, y);
+                }
+            }
+        }
+    },
+
+    /*
+    * This method shows a fading circle at the position of click/dblclick/mousedown/contextmenu
+    * @param {String} type The name of the event
+    * @param {Number} x The x coordinate of the event
+    * @param {Number} y The y coordinate of the event
+    */
+    showClickIndicator : function(type, x, y) {
+        var clickCircle = Ext.getBody().createChild({
+            tag : 'div',
+            cls : 'ghost-cursor-click-indicator',
+            style : 'left:' + x + 'px;top:' + y + 'px'
+        });
+        Ext.Function.defer(clickCircle.addCls, 50, clickCircle, ['ghost-cursor-click-indicator-big']);
+    },
+
+    /*
+    * This method shows a fading tooltip with the name of the event
+    * @param {String} type The name of the event
+    * @param {Number} x The x coordinate of the event
+    * @param {Number} y The y coordinate of the event
+    */
+    showSimulationTip: function (type, x, y) {
+        var note = Ext.getBody().createChild({
+            tag : 'span',
+            cls : 'ghost-cursor-message',
+            style : 'left:' + x + 'px;top:' + y + 'px',
+            html : type + ' at [' + x + ', ' + y + ']'
+        });
+
+        note.setStyle({ 
+            opacity: 0.5,
+            top : (y - 40) + 'px'
+        });
+        Ext.Function.defer(note.destroy, 2000, note);
+    },
+
+    /*
+    * This method updates the ghost cursor position and appearance
+    * @param {String} type The name of the event
+    * @param {Number} x The x coordinate of the event
+    * @param {Number} y The y coordinate of the event
+    */
+    updateGhostCursor: function (type, x, y) {
+        
+        this.ghostCursor.setXY([x-5, y], false);        // -5 to get index finger aligned correctly
+        if (this.hideTimer) {
+            clearTimeout(this.hideTimer);
+            this.hideTimer = null;
+        }
+   
+        switch(type) {
+            case 'touchstart':
+            case 'mousedown':
+                this.ghostCursor.addCls('ghost-cursor-press');
+            break;
+
+            case 'dblclick':
+                this.ghostCursor.addCls('ghost-cursor-press');
+                Ext.Function.defer(this.ghostCursor.removeCls, 40, this.ghostCursor, ['ghost-cursor-press']);
+            break;
+
+            case 'touchend':
+            case 'mouseup':
+            case 'click':
+                this.ghostCursor.removeCls('ghost-cursor-press');
+            break;
+        
+            case 'contextmenu' :
+            break;
+        }
+    }
+});
+</pre>
+</body>
+</html>
