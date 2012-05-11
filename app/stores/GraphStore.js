@@ -1,3 +1,5 @@
+
+// @description Store containing graph model entities. This store is static and is not changed in the app.
 Ext.regStore('GraphStore', {
     model: 'GraphModel',
 	data: [

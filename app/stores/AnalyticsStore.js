@@ -1,4 +1,6 @@
-﻿Ext.regStore('AnalyticsStore', {
+﻿
+// Store holding analytics model entities. Data is sorted by date, descending.
+Ext.regStore('AnalyticsStore', {
     model: 'AnalyticsModel',
     sorters: [{
         property: 'date',
