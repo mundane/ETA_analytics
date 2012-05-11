@@ -1,5 +1,11 @@
+
+// @description Controller for handling graphs. 
+// @contructor
 Ext.regController('AnalyticsGraphController', {
 
+	//
+	// Pie function
+	//
     'pie': function (options) {
         "use strict";
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
@@ -122,6 +128,9 @@ Ext.regController('AnalyticsGraphController', {
             }
         });
     },
+
+	// Bar graph function
+
     'bar': function (options) {
         "use strict";
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
@@ -250,6 +259,9 @@ Ext.regController('AnalyticsGraphController', {
         });
     },
 
+
+	// Column graph function
+	
     'column': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
         var generateData3 = function (n, floor) {
@@ -390,6 +402,10 @@ Ext.regController('AnalyticsGraphController', {
             }
         });
     },
+
+
+	// Line graph function
+
     'line': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
 		"use strict";
@@ -496,6 +512,9 @@ Ext.regController('AnalyticsGraphController', {
             }
         });
     },
+
+
+	// Scatterplot function
     'scatter': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
 
@@ -572,6 +591,8 @@ Ext.regController('AnalyticsGraphController', {
         });
     },
 
+
+	// Area graph function
     'area': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
 
@@ -643,6 +664,11 @@ Ext.regController('AnalyticsGraphController', {
             }
         });
     },
+
+
+
+	// Stock like graph function
+
     'stock': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
 
@@ -749,5 +775,7 @@ Ext.regController('AnalyticsGraphController', {
     }
 
 });
+
+// Save conttroller to field on app instance
 
 AnalyticsApp.controllers.analyticsGraphController = Ext.ControllerManager.get('AnalyticsGraphController');
