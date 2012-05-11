@@ -6,5 +6,6 @@
 *.mtc0
 *.synctex.gz
 *.toc
-report3.pdf
+*.out
+*.pdf
 *~
