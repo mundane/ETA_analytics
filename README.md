@@ -42,7 +42,7 @@ We use docco for our documentation
 
 Docco can be found here: http://jashkenas.github.com/docco/
 
-It is preferable to install using node.js package manager (else get it from github)
+It is preferable to install using node.js package manager npm (else get it from github)
 
 ### Installation:
 
