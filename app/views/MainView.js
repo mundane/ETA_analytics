@@ -9,6 +9,7 @@
             noteEditorView: new AnalyticsApp.views.NoteEditorView(),
             analyticsImportView: new AnalyticsApp.views.AnalyticsImportView(),
             analyticsGridView: new AnalyticsApp.views.AnalyticsGridView(),
+	    analyticsBrowserView: new AnalyticsApp.views.AnalyticsBrowserView(),
         });
 
         this.items = [
@@ -16,6 +17,7 @@
             AnalyticsApp.views.noteEditorView,
             AnalyticsApp.views.analyticsImportView,
             AnalyticsApp.views.analyticsGridView,
+	    AnalyticsApp.views.analyticsBrowserView,
         ];
 
         AnalyticsApp.views.MainView.superclass.initComponent.call(this);
