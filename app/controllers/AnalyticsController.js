@@ -142,7 +142,9 @@
             AnalyticsApp.views.notesListView,
             { type: 'slide', direction: 'right' }
         );
-    },
+
+   },
+
     'canceledit': function (options) {
 		"use strict";
         AnalyticsApp.views.mainView.setActiveItem(

@@ -25,7 +25,7 @@ new Ext.Application({
         };
 
         var onHelpTap = function() {
-			 panel.update({
+			 this.update({
  		          floating: true,
 		           modal: true,
 		           centered: true,
