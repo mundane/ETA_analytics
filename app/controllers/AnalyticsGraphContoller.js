@@ -32,8 +32,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Pie Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'mychart',
             animate: true,
             store: store1,
@@ -164,8 +164,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Bar Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'barchart',
             items: {
                 cls: 'bar1',
@@ -296,8 +296,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Column Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'columnchart',
             items: {
                 cls: 'column1',
@@ -434,8 +434,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Line Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'linechart',
             items: {
                 cls: 'line1',
@@ -548,8 +548,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Scatter Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'scatterchart',
             items: {
                 cls: 'scatter1',
@@ -626,8 +626,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Area Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'areachart',
             items: {
                 cls: 'area1',
@@ -703,8 +703,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Stock Analysis',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'stockchart',
             items: {
                 cls: 'stock1',
