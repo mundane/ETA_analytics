@@ -68,9 +68,10 @@ AnalyticsApp.views.AnalyticsImportView = Ext.extend(Ext.form.FormPanel, {
         });
     },
 	importCSVButtonTap : function() {
+
         Ext.dispatch({
             controller: AnalyticsApp.controllers.analyticsController,
-            action: 'importnote'
+            action: 'browsecsv'
         });
 	},
 

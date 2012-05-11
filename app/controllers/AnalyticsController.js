@@ -64,6 +64,14 @@
 
 	},
 
+
+   'browsecsv': function (options) {
+	AnalyticsApp.views.mainView.setActiveItem(
+            AnalyticsApp.views.analyticsBrowserView,
+            { type: 'slide', direction: 'left' }
+        );
+    },
+
 	'savedata': function (options) {
 		"use strict";
 		var currentNote = AnalyticsApp.views.analyticsImportView.getRecord(), jsonData, errors;
