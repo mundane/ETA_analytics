@@ -1,33 +1,21 @@
 Ext.regController('AnalyticsGraphController', {
 
+	
+
     'pie': function (options) {
         "use strict";
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
-        var generateData1 = function (n, floor) {
-                var data = [],
-                    p = (Math.random() * 11) + 1,
-                    i;
-
-                floor = (!floor && floor !== 0) ? 20 : floor;
-
-                for (i = 0; i < (n || 12); i++) {
-                    data.push({
-                        name: Date.monthNames[i % 12],
-                        2007: Math.floor(Math.max((Math.random() * 100), floor))
-                    });
-                }
-                return data;
-            };
+//        var generateData1 = genData(n, floor);
         var store1 = new Ext.data.JsonStore({
             fields: ['name', '2007'],
-            data: generateData1(6, 2)
+            data: genData(6, 2)
         });
 
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Pie Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'mychart',
             animate: true,
             store: store1,
@@ -155,8 +143,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Bar Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'barchart',
             items: {
                 cls: 'bar1',
@@ -284,8 +272,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Column Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'columnchart',
             items: {
                 cls: 'column1',
@@ -418,8 +406,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Line Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'linechart',
             items: {
                 cls: 'line1',
@@ -529,8 +517,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Scatter Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'scatterchart',
             items: {
                 cls: 'scatter1',
@@ -605,8 +593,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Area Chart',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'areachart',
             items: {
                 cls: 'area1',
@@ -677,8 +665,8 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Stock Analysis',
-            width: 1200,
-            height: 600,
+            width: screen.width - 70,
+            height: screen.height - 200,
             id: 'stockchart',
             items: {
                 cls: 'stock1',
@@ -751,3 +739,20 @@ Ext.regController('AnalyticsGraphController', {
 });
 
 AnalyticsApp.controllers.analyticsGraphController = Ext.ControllerManager.get('AnalyticsGraphController');
+
+function genData(n, floor) {
+                var data = [],
+                    p = (Math.random() * 11) + 1,
+                    i;
+
+                floor = (!floor && floor !== 0) ? 20 : floor;
+
+                for (i = 0; i < (n || 12); i++) {
+                    data.push({
+                        name: Date.monthNames[i % 12],
+                        2007: Math.floor(Math.max((Math.random() * 100), floor))
+                    });
+                }
+                return data;
+            };
+
