@@ -7,5 +7,5 @@
 *.synctex.gz
 *.toc
 *.out
-*.pdf
+report*.pdf
 *~
