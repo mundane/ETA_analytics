@@ -1,0 +1,157 @@
+<!DOCTYPE html>  <html> <head>   <title>AnalyticsController.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="app.html">                 app.js               </a>                                           <a class="source" href="AnalyticsController.html">                 AnalyticsController.js               </a>                                           <a class="source" href="AnalyticsGraphContoller.html">                 AnalyticsGraphContoller.js               </a>                                           <a class="source" href="AnalyticsModel.html">                 AnalyticsModel.js               </a>                                           <a class="source" href="GraphModel.html">                 GraphModel.js               </a>                                           <a class="source" href="AnalyticsStore.html">                 AnalyticsStore.js               </a>                                           <a class="source" href="GraphStore.html">                 GraphStore.js               </a>                                           <a class="source" href="AnalyticsEditorView.html">                 AnalyticsEditorView.js               </a>                                           <a class="source" href="AnalyticsGridView.html">                 AnalyticsGridView.js               </a>                                           <a class="source" href="AnalyticsImportView.html">                 AnalyticsImportView.js               </a>                                           <a class="source" href="AnalyticsListView.html">                 AnalyticsListView.js               </a>                                           <a class="source" href="DefaultView.html">                 DefaultView.js               </a>                                           <a class="source" href="MainView.html">                 MainView.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               AnalyticsController.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="err">﻿</span><span class="nx">Ext</span><span class="p">.</span><span class="nx">regController</span><span class="p">(</span><span class="s1">&#39;AnalyticsController&#39;</span><span class="p">,</span> <span class="p">{</span>
+
+    <span class="s1">&#39;index&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">MainView</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">notesListView</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;newnote&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span> <span class="nx">noteId</span> <span class="o">=</span> <span class="nx">now</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">note</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">ModelMgr</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+			<span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">noteId</span><span class="p">,</span> <span class="nx">date</span><span class="o">:</span> <span class="nx">now</span><span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">narrative</span><span class="o">:</span> <span class="s1">&#39;&#39;</span> <span class="p">},</span>
+            <span class="s1">&#39;AnalyticsModel&#39;</span>
+		<span class="p">);</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">noteEditorView</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">note</span><span class="p">);</span>
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">noteEditorView</span><span class="p">,</span>
+            <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span> <span class="p">}</span>
+		<span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;import&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span> <span class="nx">noteId</span> <span class="o">=</span> <span class="nx">now</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">note</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">ModelMgr</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span>
+			<span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">noteId</span><span class="p">,</span> <span class="nx">date</span><span class="o">:</span> <span class="nx">now</span><span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">narrative</span><span class="o">:</span> <span class="s1">&#39;&#39;</span> <span class="p">},</span>
+            <span class="s1">&#39;AnalyticsModel&#39;</span>
+        <span class="p">);</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">analyticsImportView</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">note</span><span class="p">);</span>
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">analyticsImportView</span><span class="p">,</span>
+            <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span> <span class="p">}</span>
+        <span class="p">);</span>
+	<span class="p">},</span>
+
+    <span class="s1">&#39;editnote&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+		<span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">analyticsGridView</span><span class="p">.</span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">note</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">analyticsGridView</span><span class="p">,</span>
+            <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span> <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+
+	<span class="s1">&#39;defaultview&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+		<span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+			<span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">defaultView</span><span class="p">,</span>
+			<span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span> <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+
+	<span class="s1">&#39;importnote&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">currentNote</span> <span class="o">=</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">noteEditorView</span><span class="p">.</span><span class="nx">getRecord</span><span class="p">();</span>
+
+	<span class="p">},</span>
+
+	<span class="s1">&#39;savedata&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">currentNote</span> <span class="o">=</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">analyticsImportView</span><span class="p">.</span><span class="nx">getRecord</span><span class="p">(),</span> <span class="nx">jsonData</span><span class="p">,</span> <span class="nx">errors</span><span class="p">;</span>
+		<span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">analyticsImportView</span><span class="p">.</span><span class="nx">updateRecord</span><span class="p">(</span><span class="nx">currentNote</span><span class="p">);</span>
+		<span class="nx">jsonData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">new</span> <span class="nx">CSVToArray</span><span class="p">(</span><span class="nx">currentNote</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;narrative&#39;</span><span class="p">)));</span>
+		<span class="nx">currentNote</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;narrative&#39;</span><span class="p">,</span> <span class="nx">jsonData</span><span class="p">);</span>
+
+        <span class="nx">errors</span> <span class="o">=</span> <span class="nx">currentNote</span><span class="p">.</span><span class="nx">validate</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">errors</span><span class="p">.</span><span class="nx">isValid</span><span class="p">())</span> <span class="p">{</span>
+			<span class="nx">currentNote</span><span class="p">.</span><span class="nx">reject</span><span class="p">();</span>
+            <span class="nx">Ext</span><span class="p">.</span><span class="nx">Msg</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Wait!&#39;</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">getByField</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">message</span><span class="p">,</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">emptyFn</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="kc">null</span> <span class="o">===</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">findRecord</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nx">currentNote</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">currentNote</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">currentNote</span><span class="p">.</span><span class="nx">setDirty</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">sync</span><span class="p">();</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">sort</span><span class="p">([{</span> <span class="nx">property</span><span class="o">:</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;DESC&#39;</span><span class="p">}]);</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">notesListView</span><span class="p">.</span><span class="nx">refreshList</span><span class="p">();</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">notesListView</span><span class="p">,</span>
+            <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span> <span class="p">}</span>
+        <span class="p">);</span>
+
+	<span class="p">},</span>
+
+    <span class="s1">&#39;savenote&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">currentNote</span> <span class="o">=</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">noteEditorView</span><span class="p">.</span><span class="nx">getRecord</span><span class="p">(),</span> <span class="nx">errors</span><span class="p">;</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">noteEditorView</span><span class="p">.</span><span class="nx">updateRecord</span><span class="p">(</span><span class="nx">currentNote</span><span class="p">);</span>
+
+		<span class="nx">errors</span> <span class="o">=</span> <span class="nx">currentNote</span><span class="p">.</span><span class="nx">validate</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">errors</span><span class="p">.</span><span class="nx">isValid</span><span class="p">())</span> <span class="p">{</span>
+			<span class="nx">currentNote</span><span class="p">.</span><span class="nx">reject</span><span class="p">();</span>
+            <span class="nx">Ext</span><span class="p">.</span><span class="nx">Msg</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Wait!&#39;</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">getByField</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">message</span><span class="p">,</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">emptyFn</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="kc">null</span> <span class="o">===</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">findRecord</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nx">currentNote</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">currentNote</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">currentNote</span><span class="p">.</span><span class="nx">setDirty</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">sync</span><span class="p">();</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">sort</span><span class="p">([{</span> <span class="nx">property</span><span class="o">:</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;DESC&#39;</span><span class="p">}]);</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">notesListView</span><span class="p">.</span><span class="nx">refreshList</span><span class="p">();</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">notesListView</span><span class="p">,</span>
+            <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span> <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;deletenote&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">currentNote</span> <span class="o">=</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">noteEditorView</span><span class="p">.</span><span class="nx">getRecord</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">findRecord</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nx">currentNote</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">currentNote</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">stores</span><span class="p">.</span><span class="nx">analyticsStore</span><span class="p">.</span><span class="nx">sync</span><span class="p">();</span>
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">notesListView</span><span class="p">.</span><span class="nx">refreshList</span><span class="p">();</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">notesListView</span><span class="p">,</span>
+            <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span> <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;canceledit&#39;</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">mainView</span><span class="p">.</span><span class="nx">setActiveItem</span><span class="p">(</span>
+            <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">notesListView</span><span class="p">,</span>
+            <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span> <span class="p">}</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">analyticsController</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">ControllerManager</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;AnalyticsController&#39;</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>  <html> <head>   <title>AnalyticsImportView.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="app.html">                 app.js               </a>                                           <a class="source" href="AnalyticsController.html">                 AnalyticsController.js               </a>                                           <a class="source" href="AnalyticsGraphContoller.html">                 AnalyticsGraphContoller.js               </a>                                           <a class="source" href="AnalyticsModel.html">                 AnalyticsModel.js               </a>                                           <a class="source" href="GraphModel.html">                 GraphModel.js               </a>                                           <a class="source" href="AnalyticsStore.html">                 AnalyticsStore.js               </a>                                           <a class="source" href="GraphStore.html">                 GraphStore.js               </a>                                           <a class="source" href="AnalyticsEditorView.html">                 AnalyticsEditorView.js               </a>                                           <a class="source" href="AnalyticsGridView.html">                 AnalyticsGridView.js               </a>                                           <a class="source" href="AnalyticsImportView.html">                 AnalyticsImportView.js               </a>                                           <a class="source" href="AnalyticsListView.html">                 AnalyticsListView.js               </a>                                           <a class="source" href="DefaultView.html">                 DefaultView.js               </a>                                           <a class="source" href="MainView.html">                 MainView.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               AnalyticsImportView.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">AnalyticsImportView</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">Ext</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">FormPanel</span><span class="p">,</span> <span class="p">{</span>
+
+    <span class="nx">initComponent</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">backButton</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">Button</span><span class="p">({</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Home&#39;</span><span class="p">,</span>
+            <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;back&#39;</span><span class="p">,</span>
+            <span class="nx">handler</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">backButtonTap</span><span class="p">,</span>
+            <span class="nx">scope</span><span class="o">:</span> <span class="k">this</span>
+        <span class="p">});</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">saveButton</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">Button</span><span class="p">({</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Save&#39;</span><span class="p">,</span>
+            <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;action&#39;</span><span class="p">,</span>
+            <span class="nx">handler</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">saveButtonTap</span><span class="p">,</span>
+            <span class="nx">scope</span><span class="o">:</span> <span class="k">this</span>
+        <span class="p">});</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">importCSVButton</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">Button</span><span class="p">({</span>
+            <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Import CSV&#39;</span><span class="p">,</span>
+            <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;action&#39;</span><span class="p">,</span>
+            <span class="nx">handler</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">importCSVButtonTap</span><span class="p">,</span>
+            <span class="nx">scope</span><span class="o">:</span> <span class="k">this</span>
+        <span class="p">});</span>
+
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">trashButton</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">Button</span><span class="p">({</span>
+            <span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;trash&#39;</span><span class="p">,</span>
+            <span class="nx">iconMask</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">handler</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">trashButtonTap</span><span class="p">,</span>
+            <span class="nx">scope</span><span class="o">:</span> <span class="k">this</span>
+        <span class="p">});</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">topToolbar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">Toolbar</span><span class="p">({</span>
+            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Import Data&#39;</span><span class="p">,</span>
+            <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">backButton</span><span class="p">,</span>
+                <span class="p">{</span> <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;spacer&#39;</span> <span class="p">},</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">saveButton</span><span class="p">,</span>
+				<span class="k">this</span><span class="p">.</span><span class="nx">importCSVButton</span>
+            <span class="p">]</span>
+        <span class="p">});</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">bottomToolbar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">Toolbar</span><span class="p">({</span>
+            <span class="nx">dock</span><span class="o">:</span> <span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+            <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+                <span class="p">{</span> <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;spacer&#39;</span> <span class="p">},</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">trashButton</span>
+            <span class="p">]</span>
+        <span class="p">});</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">dockedItems</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">topToolbar</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">bottomToolbar</span><span class="p">];</span>
+
+        <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">views</span><span class="p">.</span><span class="nx">AnalyticsImportView</span><span class="p">.</span><span class="nx">superclass</span><span class="p">.</span><span class="nx">initComponent</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">backButtonTap</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">Ext</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+            <span class="nx">controller</span><span class="o">:</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">analyticsController</span><span class="p">,</span>
+            <span class="nx">action</span><span class="o">:</span> <span class="s1">&#39;canceledit&#39;</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+
+    <span class="nx">saveButtonTap</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;savedata&#39;</span><span class="p">);</span>
+        <span class="nx">Ext</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+            <span class="nx">controller</span><span class="o">:</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">analyticsController</span><span class="p">,</span>
+            <span class="nx">action</span><span class="o">:</span> <span class="s1">&#39;savedata&#39;</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+	<span class="nx">importCSVButtonTap</span> <span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">Ext</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+            <span class="nx">controller</span><span class="o">:</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">analyticsController</span><span class="p">,</span>
+            <span class="nx">action</span><span class="o">:</span> <span class="s1">&#39;importnote&#39;</span>
+        <span class="p">});</span>
+	<span class="p">},</span>
+
+    <span class="nx">trashButtonTap</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">Ext</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+            <span class="nx">controller</span><span class="o">:</span> <span class="nx">AnalyticsApp</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">analyticsController</span><span class="p">,</span>
+            <span class="nx">action</span><span class="o">:</span> <span class="s1">&#39;deletenote&#39;</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+	<span class="nx">items</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;textfield&#39;</span><span class="p">,</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Title&#39;</span><span class="p">,</span>
+        <span class="nx">required</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span> <span class="p">{</span>
+        <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;textareafield&#39;</span><span class="p">,</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;narrative&#39;</span><span class="p">,</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Narrative&#39;</span>
+    <span class="p">}]</span>
+
+<span class="p">});</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
