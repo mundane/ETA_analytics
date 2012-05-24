@@ -1,9 +1,8 @@
-﻿// @description Model representing the data to be handled
-// @param id Id of the entity Must be present
-// @param date Date of creation
-// @param title Title of the data Must be present
-// @param narrative The actual data
-
+﻿// @description Model representing the data to be handled  
+// @param id Id of the entity Must be present  
+// @param date Date of creation  
+// @param title Title of the data Must be present  
+// @param narrative The actual data  
 Ext.regModel('AnalyticsModel', {
     idProperty: 'id',
     fields: [
