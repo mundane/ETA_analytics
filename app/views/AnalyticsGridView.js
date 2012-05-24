@@ -60,6 +60,8 @@
         AnalyticsApp.views.AnalyticsGridView.superclass.initComponent.call(this);
 
     },
+
+	
     backButtonTap: function () {
         Ext.dispatch({
             controller: AnalyticsApp.controllers.analyticsController,
@@ -90,5 +92,6 @@
         });
 
     }
+
 
 });
