@@ -141,6 +141,10 @@ Ext.regController('AnalyticsGraphController', {
                     field: 'value',
                     showInLegend: true,
                     highlight: false,
+					// legend label
+                    label: {
+                        field: 'name'
+                    },
                     listeners: {
                         'labelOverflow': function (label, item) {
                             item.useCallout = true;
@@ -155,23 +159,18 @@ Ext.regController('AnalyticsGraphController', {
                         },
                         filter: function () {
                             return false;
-                        },
-                        box: {
-                            //no config here.
-                        },
+                        },	
                         lines: {
                             'stroke-width': 2,
                             offsetFromViz: 20
                         },
                         label: {
+							field: 'name',
                             font: 'italic 14px Arial'
                         },
                         styles: {
                             font: '14px Arial'
                         }
-                    },
-                    label: {
-                        field: 'name'
                     }
                 }]
             }
