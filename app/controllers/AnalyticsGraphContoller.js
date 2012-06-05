@@ -1,5 +1,4 @@
-
-// @description Controller for handling graphs. 
+// @description Controller for handling graphs.
 // @contructor
 Ext.regController('AnalyticsGraphController', {
 	//
