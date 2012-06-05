@@ -8,8 +8,6 @@ Ext.regController('AnalyticsGraphController', {
 		"use strict";
 		// saves image as a png
 		var saveAsImage = function (sel) {	
-			console.log(sel);
-			
 			// get offsets
 			var offsets = [];
 			
@@ -24,7 +22,7 @@ Ext.regController('AnalyticsGraphController', {
 			// get canvases
 			var canvases = $(sel).contents().find("canvas");
 			
-			console.log(canvases);
+			//console.log(canvases);
 			
 			// get bottom context
 			var ctx = canvases[0].getContext('2d');			
@@ -42,13 +40,12 @@ Ext.regController('AnalyticsGraphController', {
 			// save to png
 			var img = canvases[0].toDataURL("image/png");
 			img.replace("image/png","image/octet-stream");
-			document.location.href = img;
+			// open in a tab
+			window.open(img);
+			// open in same window
+			//document.location.href = img;
 		};
-		// wrapper for saving images
-		var saveImageWrapper = function () {
-			saveAsImage(".pie1");
-		};		
-		saveImageWrapper();
+		saveAsImage(".chart");
 	},
 	//
 	// Pie function
@@ -91,7 +88,7 @@ Ext.regController('AnalyticsGraphController', {
             animate: true,
             store: store1,
             items: {
-                cls: 'pie1',
+                cls: 'chart',
                 store: store1,
                 theme: 'Demo',
                 shadow: false,
@@ -227,7 +224,7 @@ Ext.regController('AnalyticsGraphController', {
             height: screen.height - 200,
             id: 'barchart',
             items: {
-                cls: 'bar1',
+                cls: 'chart',
                 theme: 'Demo',
                 animate: true,
                 store: store2,
@@ -365,7 +362,7 @@ Ext.regController('AnalyticsGraphController', {
             height: screen.height - 200,
             id: 'columnchart',
             items: {
-                cls: 'column1',
+                cls: 'chart',
                 animate: {
                     easing: 'bounceOut',
                     duration: 750
@@ -509,7 +506,7 @@ Ext.regController('AnalyticsGraphController', {
             height: screen.height - 200,
             id: 'linechart',
             items: {
-                cls: 'line1',
+                cls: 'chart',
                 theme: 'Demo',
                 store: store4,
                 animate: true,
@@ -629,7 +626,7 @@ Ext.regController('AnalyticsGraphController', {
             height: screen.height - 200,
             id: 'scatterchart',
             items: {
-                cls: 'scatter1',
+                cls: 'chart',
                 theme: 'Demo',
                 animate: false,
                 // shadow: true,
@@ -713,7 +710,7 @@ Ext.regController('AnalyticsGraphController', {
             height: screen.height - 200,
             id: 'areachart',
             items: {
-                cls: 'area1',
+                cls: 'chart',
                 theme: 'Demo',
                 store: store6,
                 animate: true,
@@ -796,7 +793,7 @@ Ext.regController('AnalyticsGraphController', {
             height: screen.height - 200,
             id: 'stockchart',
             items: {
-                cls: 'stock1',
+                cls: 'chart',
                 theme: 'Demo',
                 legend: {
                     position: {
