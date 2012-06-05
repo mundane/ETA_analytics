@@ -37,7 +37,7 @@
 
         this.Canvas = new Ext.Component({
             id: 'canvas',
-            tpl: '<div id="record-{id}">{narrative}</div>'
+            tpl: '<div class="analytic_record" id="{id}">{narrative}</div>'
         });
 
         this.Sidebar = new Ext.Panel({
@@ -87,8 +87,9 @@
 
     trashButtonTap: function () {
         Ext.dispatch({
-            controller: AnalyticsApp.controllers.analyticsGraphController,
-            action: 'pie'
+            controller: AnalyticsApp.controllers.analyticsController,
+            action: 'deletenote',
+			id: $('.analytic_record').attr('id')
         });
 
     }

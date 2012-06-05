@@ -1,5 +1,4 @@
-
-// @description Controller for handling graphs. 
+// @description Controller for handling graphs.
 // @contructor
 Ext.regController('AnalyticsGraphController', {
 	//
@@ -85,8 +84,14 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Pie Chart',
-            width: screen.width - 70,
-            height: screen.height - 200,
+			width: function () {
+						if (Ext.orientation == 'portrait')
+							return 530;
+						else if (Ext.orientation == 'landscape')
+							return 950;
+						else return (screen.witdh - 70);
+                    },
+			height: (screen.height - 200),
             id: 'mychart',
             animate: true,
             store: store1,
@@ -217,7 +222,13 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Bar Chart',
-            width: screen.width - 70,
+            			width: function () {
+						if (Ext.orientation == 'portrait')
+							return 530;
+						else if (Ext.orientation == 'landscape')
+							return 950;
+						else return (screen.witdh - 70);
+                    },
             height: screen.height - 200,
             id: 'barchart',
             items: {
@@ -349,7 +360,13 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Column Chart',
-            width: screen.width - 70,
+			width: function () {
+						if (Ext.orientation == 'portrait')
+							return 530;
+						else if (Ext.orientation == 'landscape')
+							return 950;
+						else return (screen.witdh - 70);
+                    },
             height: screen.height - 200,
             id: 'columnchart',
             items: {
@@ -487,7 +504,13 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Line Chart',
-            width: screen.width - 70,
+			width: function () {
+						if (Ext.orientation == 'portrait')
+							return 530;
+						else if (Ext.orientation == 'landscape')
+							return 950;
+						else return (screen.witdh - 70);
+                    },
             height: screen.height - 200,
             id: 'linechart',
             items: {
@@ -601,7 +624,13 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Scatter Chart',
-            width: screen.width - 70,
+			width: function () {
+						if (Ext.orientation == 'portrait')
+							return 530;
+						else if (Ext.orientation == 'landscape')
+							return 950;
+						else return (screen.witdh - 70);
+                    },
             height: screen.height - 200,
             id: 'scatterchart',
             items: {
@@ -679,7 +708,13 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Area Chart',
-            width: screen.width - 70,
+			width: function () {
+						if (Ext.orientation == 'portrait')
+							return 530;
+						else if (Ext.orientation == 'landscape')
+							return 950;
+						else return (screen.witdh - 70);
+                    },
             height: screen.height - 200,
             id: 'areachart',
             items: {
@@ -756,7 +791,13 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Stock Analysis',
-            width: screen.width - 70,
+			width: function () {
+						if (Ext.orientation == 'portrait')
+							return 530;
+						else if (Ext.orientation == 'landscape')
+							return 950;
+						else return (screen.witdh - 70);
+                    },
             height: screen.height - 200,
             id: 'stockchart',
             items: {

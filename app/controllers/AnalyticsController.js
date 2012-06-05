@@ -137,9 +137,8 @@
 
     'deletenote': function (options) {
 		"use strict";
-        var currentNote = AnalyticsApp.views.noteEditorView.getRecord();
-
-        if (AnalyticsApp.stores.analyticsStore.findRecord('id', currentNote.data.id)) {
+		var currentNote;
+        if (currentNote = AnalyticsApp.stores.analyticsStore.findRecord('id', options.id)) {
             AnalyticsApp.stores.analyticsStore.remove(currentNote);
         }
 
