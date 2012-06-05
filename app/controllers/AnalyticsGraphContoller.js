@@ -8,8 +8,6 @@ Ext.regController('AnalyticsGraphController', {
 		"use strict";
 		// saves image as a png
 		var saveAsImage = function (sel) {	
-			//console.log(sel);
-			
 			// get offsets
 			var offsets = [];
 			
@@ -47,13 +45,7 @@ Ext.regController('AnalyticsGraphController', {
 			// open in same window
 			//document.location.href = img;
 		};
-		// wrapper for saving images
-		// possibly no longer needed
-		var saveImageWrapper = function () {
-			saveAsImage(".chart");
-		};		
-		// run it
-		saveImageWrapper();
+		saveAsImage(".chart");
 	},
 	//
 	// Pie function
