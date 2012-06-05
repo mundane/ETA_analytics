@@ -25,7 +25,7 @@ Ext.regController('AnalyticsGraphController', {
 			// get canvases
 			var canvases = $(sel).contents().find("canvas");
 			
-			console.log(canvases);
+			//console.log(canvases);
 			
 			// get bottom context
 			var ctx = canvases[0].getContext('2d');			
@@ -43,7 +43,10 @@ Ext.regController('AnalyticsGraphController', {
 			// save to png
 			var img = canvases[0].toDataURL("image/png");
 			img.replace("image/png","image/octet-stream");
-			document.location.href = img;
+			// open in a tab
+			window.open(img);
+			// open in same window
+			//document.location.href = img;
 		};
 		// wrapper for saving images
 		// possibly no longer needed
