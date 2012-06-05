@@ -2,7 +2,55 @@
 // @description Controller for handling graphs. 
 // @contructor
 Ext.regController('AnalyticsGraphController', {
-
+	//
+	// saveImage function 
+	//
+	'saveImage': function () {
+		"use strict";
+		// saves image as a png
+		var saveAsImage = function (sel) {	
+			console.log(sel);
+			
+			// get offsets
+			var offsets = [];
+			
+			$(sel).contents().each(function() {
+				var top = $(this).css("top");
+				var left = $(this).css("left");
+				top = top.replace("auto","0");
+				left = left.replace("auto","0");
+				offsets.push([parseFloat(top),parseFloat(left)]);
+			});
+			
+			// get canvases
+			var canvases = $(sel).contents().find("canvas");
+			
+			console.log(canvases);
+			
+			// get bottom context
+			var ctx = canvases[0].getContext('2d');			
+			
+			ctx.fillStyle = "#8ED6FF";
+			ctx.fill();
+			
+			// draw all canvases to bottom context, skip canvas 0			
+			for(var i = 1; i < canvases.length; i++) {
+				ctx.drawImage(canvases[i],offsets[i][1],offsets[i][0]);		
+			}
+			// maybe not needed
+			ctx.save();
+			
+			// save to png
+			var img = canvases[0].toDataURL("image/png");
+			img.replace("image/png","image/octet-stream");
+			document.location.href = img;
+		};
+		// wrapper for saving images
+		var saveImageWrapper = function () {
+			saveAsImage(".pie1");
+		};		
+		saveImageWrapper();
+	},
 	//
 	// Pie function
 	//

@@ -72,7 +72,7 @@
     saveButtonTap: function () {
         Ext.dispatch({
             controller: AnalyticsApp.controllers.analyticsGraphController,
-            action: 'pie'
+            action: 'saveImage'
         });
     },
 
