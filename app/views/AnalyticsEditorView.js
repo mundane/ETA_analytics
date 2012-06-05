@@ -79,6 +79,6 @@
     }, {
         xtype: 'textareafield',
         name: 'narrative',
-        label: 'Narrative'
+        label: 'Data'
     }]
 });

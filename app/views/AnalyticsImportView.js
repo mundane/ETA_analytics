@@ -89,7 +89,7 @@ AnalyticsApp.views.AnalyticsImportView = Ext.extend(Ext.form.FormPanel, {
     }, {
         xtype: 'textareafield',
         name: 'narrative',
-        label: 'Narrative'
+        label: 'Data'
     }]
 
 });
