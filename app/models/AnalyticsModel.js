@@ -9,7 +9,7 @@ Ext.regModel('AnalyticsModel', {
         { name: 'id', type: 'int' },
         { name: 'date', type: 'date', dateFormat: 'c' },
         { name: 'title', type: 'string' },
-        { name: 'narrative', type: 'string' }
+        { name: 'narrative', type: 'json' }
     ],
     validations: [
         { type: 'presence', field: 'id' },

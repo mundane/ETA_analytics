@@ -43,7 +43,16 @@
 
     'editnote': function (options) {
 		"use strict";
-		AnalyticsApp.views.analyticsGridView.Canvas.update(options.note.data);
+		var templateData = {};
+		var rows = new Array();
+		var nar = Ext.decode(options.note.data.narrative);
+		for (var i=0; i < nar.length; i++) {
+			rows.push({row: nar[i]});
+			console.log(nar[i]);
+		};
+		console.log(rows);
+		$.extend(templateData, {title: options.note.data.title}, {rows : rows});
+		AnalyticsApp.views.analyticsGridView.Canvas.update(templateData);
         AnalyticsApp.views.mainView.setActiveItem(
             AnalyticsApp.views.analyticsGridView,
             { type: 'slide', direction: 'left' }
@@ -76,7 +85,7 @@
 		"use strict";
 		var currentNote = AnalyticsApp.views.analyticsImportView.getRecord(), jsonData, errors;
 		AnalyticsApp.views.analyticsImportView.updateRecord(currentNote);
-		jsonData = new JSON.stringify(new CSVToArray(currentNote.get('narrative')));
+		jsonData = Ext.encode(new CSVToArray(currentNote.get('narrative')));
 		currentNote.set('narrative', jsonData);
 
         errors = currentNote.validate();

@@ -37,7 +37,7 @@
 
         this.Canvas = new Ext.Component({
             id: 'canvas',
-            tpl: '<div class="analytic_record" id="{id}">{narrative}</div>'
+            tpl: '<div class="anan"><h2>Data title: {title}</h2><tpl for="rows"><div> {row} </div></tpl></div>'
         });
 
         this.Sidebar = new Ext.Panel({
