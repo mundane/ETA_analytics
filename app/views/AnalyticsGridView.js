@@ -37,7 +37,7 @@
 
         this.Canvas = new Ext.Component({
             id: 'canvas',
-            tpl: '<div class="anan"><h2>Data title: {title}</h2><tpl for="rows"><div> {row} </div></tpl></div>'
+            tpl: '<div class="analytic_record" id={id}><h2>Data title: {title}</h2><tpl for="rows"><div> {row} </div></tpl></div>'
         });
 
         this.Sidebar = new Ext.Panel({
@@ -80,7 +80,8 @@
         if (records[0]) {
             Ext.dispatch({
                 controller: AnalyticsApp.controllers.analyticsGraphController,
-                action: records[0].data.title.toLowerCase()
+                action: records[0].data.title.toLowerCase(),
+				id: $('.analytic_record').attr('id')
             });
         }
     },

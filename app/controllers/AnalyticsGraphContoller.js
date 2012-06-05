@@ -2,15 +2,15 @@
 // @contructor
 Ext.regController('AnalyticsGraphController', {
 	//
-	// saveImage function 
+	// saveImage function
 	//
 	'saveImage': function () {
 		"use strict";
 		// saves image as a png
-		var saveAsImage = function (sel) {	
+		var saveAsImage = function (sel) {
 			// get offsets
 			var offsets = [];
-			
+
 			$(sel).contents().each(function() {
 				var top = $(this).css("top");
 				var left = $(this).css("left");
@@ -18,32 +18,27 @@ Ext.regController('AnalyticsGraphController', {
 				left = left.replace("auto","0");
 				offsets.push([parseFloat(top),parseFloat(left)]);
 			});
-			
+
 			// get canvases
 			var canvases = $(sel).contents().find("canvas");
-			
-			//console.log(canvases);
-			
+
 			// get bottom context
-			var ctx = canvases[0].getContext('2d');			
-			
+			var ctx = canvases[0].getContext('2d');
+
 			ctx.fillStyle = "#8ED6FF";
 			ctx.fill();
-			
-			// draw all canvases to bottom context, skip canvas 0			
+			// draw all canvases to bottom context, skip canvas 0
 			for(var i = 1; i < canvases.length; i++) {
-				ctx.drawImage(canvases[i],offsets[i][1],offsets[i][0]);		
+				ctx.drawImage(canvases[i],offsets[i][1],offsets[i][0]);
 			}
 			// maybe not needed
 			ctx.save();
-			
 			// save to png
 			var img = canvases[0].toDataURL("image/png");
 			img.replace("image/png","image/octet-stream");
 			// open in a tab
 			window.open(img);
 			// open in same window
-			//document.location.href = img;
 		};
 		saveAsImage(".chart");
 	},
@@ -53,29 +48,33 @@ Ext.regController('AnalyticsGraphController', {
     'pie': function (options) {
         "use strict";
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
-        var generateData1 = function (n, floor) {
-                var data = [],
-                    p = (Math.random() * 11) + 1,
-                    i;
+		var currentNote = AnalyticsApp.stores.analyticsStore.findRecord('id', options.id);
+		var encoded = Ext.decode(currentNote.data.narrative);
+		//var heading = encoded[0];
+		var data = [];
+		//var rest = encoded.slice(1,encoded.length);
 
-                floor = (!floor && floor !== 0) ? 20 : floor;
+		//
+		for (var i=0; i < encoded.length; i++) {
+			var temp = {};
+			temp['value'] = 0;
+			for (var j=0; j < encoded[i].length; j++) {
+				if(j === 0){
+					temp['name'] = encoded[i][j];
+				} else{
+					temp['value'] = parseInt(temp['value'],10) + parseInt(encoded[i][j],10);
+				}
+			};
+			data.push(temp);
 
-                for (i = 0; i < (n || 12); i++) {
-                    data.push({
-                        name: Date.monthNames[i % 12],
-                        2007: Math.floor(Math.max((Math.random() * 100), floor))
-                    });
-                }
-                return data;
-            };
-        var store1 = new Ext.data.JsonStore({
-            fields: ['name', '2007'],
-            data: generateData1(6, 2)
+		};
+		var storePie = new Ext.data.JsonStore({
+            fields: ['name', 'value'],
+            data: data
         });
-
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
-            title: 'Pie Chart',
+            title: currentNote.data.title,
 			width: function () {
 						if (Ext.orientation == 'portrait')
 							return 530;
@@ -83,13 +82,13 @@ Ext.regController('AnalyticsGraphController', {
 							return 950;
 						else return (screen.witdh - 70);
                     },
-			height: (screen.height - 200),
+			height: (screen.height-200),
             id: 'mychart',
             animate: true,
-            store: store1,
+            store: storePie,
             items: {
                 cls: 'chart',
-                store: store1,
+                store: storePie,
                 theme: 'Demo',
                 shadow: false,
                 animate: true,
@@ -111,7 +110,7 @@ Ext.regController('AnalyticsGraphController', {
                     listeners: {
                         show: function (interaction, item, panel) {
                             var storeItem = item.storeItem;
-                            panel.update(['<ul><li><b>Month: </b>' + storeItem.get('name') + '</li>', '<li><b>Value: </b> ' + storeItem.get('2007') + '</li></ul>'].join(''));
+                            panel.update(['<ul><li><b>Type: </b>' + storeItem.get('name') + '</li>', '<li><b>Value: </b> ' + storeItem.get('value') + '</li></ul>'].join(''));
                         }
                     }
                 }, {
@@ -122,7 +121,7 @@ Ext.regController('AnalyticsGraphController', {
                             var sum = 0,
                                 i = items.length;
                             while (i--) {
-                                sum += items[i].storeItem.get('2007');
+                                sum += items[i].storeItem.get('value');
                             }
                             chartPanel.descriptionPanel.setTitle('Total: ' + sum);
                             chartPanel.headerPanel.setActiveItem(1, {
@@ -139,7 +138,7 @@ Ext.regController('AnalyticsGraphController', {
                 }],
                 series: [{
                     type: 'pie',
-                    field: '2007',
+                    field: 'value',
                     showInLegend: true,
                     highlight: false,
                     listeners: {
@@ -214,7 +213,7 @@ Ext.regController('AnalyticsGraphController', {
         var chartPanel = new Ext.chart.Panel({
             renderTo: 'canvas',
             title: 'Bar Chart',
-            			width: function () {
+					width: function () {
 						if (Ext.orientation == 'portrait')
 							return 530;
 						else if (Ext.orientation == 'landscape')
@@ -317,7 +316,6 @@ Ext.regController('AnalyticsGraphController', {
 
 
 	// Column graph function
-	
     'column': function (options) {
         AnalyticsApp.views.analyticsGridView.Canvas.update("");
         var generateData3 = function (n, floor) {
