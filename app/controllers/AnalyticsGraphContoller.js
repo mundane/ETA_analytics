@@ -80,7 +80,7 @@ Ext.regController('AnalyticsGraphController', {
 							return 530;
 						else if (Ext.orientation == 'landscape')
 							return 950;
-						else return (screen.witdh - 70);
+						else return (screen.width - 70); // changed from .witdh
                     },
 			height: (screen.height-200),
             id: 'mychart',
