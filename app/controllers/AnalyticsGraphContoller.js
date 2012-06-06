@@ -217,7 +217,7 @@ Ext.regController('AnalyticsGraphController', {
 							return 530;
 						else if (Ext.orientation == 'landscape')
 							return 950;
-						else return (screen.witdh - 70);
+						else return (screen.width - 70);
                     },
             height: screen.height - 200,
             id: 'barchart',
@@ -354,7 +354,7 @@ Ext.regController('AnalyticsGraphController', {
 							return 530;
 						else if (Ext.orientation == 'landscape')
 							return 950;
-						else return (screen.witdh - 70);
+						else return (screen.width - 70);
                     },
             height: screen.height - 200,
             id: 'columnchart',
@@ -498,7 +498,7 @@ Ext.regController('AnalyticsGraphController', {
 							return 530;
 						else if (Ext.orientation == 'landscape')
 							return 950;
-						else return (screen.witdh - 70);
+						else return (screen.width - 70);
                     },
             height: screen.height - 200,
             id: 'linechart',
@@ -618,7 +618,7 @@ Ext.regController('AnalyticsGraphController', {
 							return 530;
 						else if (Ext.orientation == 'landscape')
 							return 950;
-						else return (screen.witdh - 70);
+						else return (screen.width - 70);
                     },
             height: screen.height - 200,
             id: 'scatterchart',
@@ -702,7 +702,7 @@ Ext.regController('AnalyticsGraphController', {
 							return 530;
 						else if (Ext.orientation == 'landscape')
 							return 950;
-						else return (screen.witdh - 70);
+						else return (screen.width - 70);
                     },
             height: screen.height - 200,
             id: 'areachart',
@@ -785,7 +785,7 @@ Ext.regController('AnalyticsGraphController', {
 							return 530;
 						else if (Ext.orientation == 'landscape')
 							return 950;
-						else return (screen.witdh - 70);
+						else return (screen.width - 70);
                     },
             height: screen.height - 200,
             id: 'stockchart',
