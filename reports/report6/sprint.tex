@@ -2,11 +2,11 @@
 \label{sec:Sprint Material}
 \subsection{Version} % (fold)
 \label{sub:Version}
-The current state of our app has version 0.0.3. Meaning that the app is still alpha quality, with some functionality implementet, but still contains unfinished work.
+The current state of our app has version 0.0.4. Meaning that the app is still alpha quality, with some functionality implementet, but still contains unfinished work.
 % subsection Version (end)
 \subsection{Source code} % (fold)
 \label{sub:Source code}
-We still use Git and GitHub. The source code is available at: \url{https://github.com/mundane/ETA_analytics}, in the app folder. The other folders contains prototypes and experiments.
+We still use Git and GitHub. The source code is available at: \url{https://github.com/mundane/ETA_analytics}, in the app folder. The other folders contains prototypes, experiments, and reports.
 % subsection Source code (end)
 \subsection{Sprint Explanation}
 The burndown chart shows that, better coordination on task and work assignment helped in completing the taks planned for this sprint.
@@ -14,27 +14,29 @@ Surplus time was spent on research for eg Tools for Software Documentation and a
 The project backlog and the graph with the hours we spent are at the end of this document in appendix \ref{sec:Scrum Material}. The reader should note that the graph are vector graphics, so zooming is posible. \\
 As can be seen from our backlog we have added some user stories and kept on working on some from the previous sprint.
 \subsection{User Stories}
-For sprint \# 5 we worked on the following user stories: \\
-
-As an analytic \\
-I want to be able to browse files on the devices\\
-So that I can view my files on the App \\
-
-As a programmer\\
-I want to have my project source code commented  \\
-So that I can get a better overview \\
-
-As an analytic\\
-I want the graphics to scale to the screen size, when i turn the tablet between landscape and portrait format\\
-So the graphics are changed to fit the screen\\
-
+For sprint \# 5 we revisited the following user stories: \\
+\begin{verbatim}
+	As an analytic
+	I want to save data for later sessions
+	So I can continue working on datasets
+\end{verbatim}
+\begin{verbatim}
+As an analytic
+I want to make pie charts, column charts, bar charts, etc
+So that I can make data more presentable
+\end{verbatim}
+\begin{verbatim}
+As an analytic
+I want the graphics to scale to the screen size, when i turn the tablet between landscape and portrait format
+So the graphics are changed to fit the screen
+\end{verbatim}
 \subsection{Tasks} % (fold)
 \label{sub:Tasks}
 The stories are divided up into the following tasks
 % subsection Tasks (end)Tasks
 \begin{itemize}
-	\item Implement File Browser.
-	\item Review code and make comments.
+	\item Implement Dynamic import of data into graphs.
+	\item Implement save functionality for graphs.
 	\item Create profiling for the graphs to recognize the use of landscape and portrait mode.
 \end{itemize}
 
